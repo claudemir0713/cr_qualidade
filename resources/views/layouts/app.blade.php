@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Hc Textil</title>
+    <title>Ceramica Lorenzetti</title>
     <link rel="shortcut icon" href=" {{ asset('img/icon.png') }} ">
 
     <!-- Scripts -->

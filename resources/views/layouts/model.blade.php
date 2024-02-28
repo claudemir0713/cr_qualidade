@@ -7,7 +7,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>HC Brasil</title>
+        <title>Cerâmica Lorenzetti</title>
         <link rel="shortcut icon" href=" {{ asset('img/icone.png') }} ">
         <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -62,7 +62,7 @@
                 <!--logo start-->
 
                 <a href="#" class="logo">
-                    <img src=" {{asset('img/logo.png')}} " height="40"> &nbsp; &nbsp;<i>HC Textil</i>
+                    <img src=" {{asset('img/logo.png')}} " height="40"> &nbsp; &nbsp;<i>CERÂMICA LORENZETTI</i>
                 </a>
                 <!--logo end-->
 

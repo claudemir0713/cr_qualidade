@@ -26,55 +26,25 @@ class MenuSeeder extends Seeder
                 , 'rota'        =>''
                 , 'icone'       =>''
             ],
-            [
-                'uuid'          => Uuid::uuid1()->toString()
-                ,'ordem'         =>'01.001'
-                , 'descricao'   =>'Menu'
-                , 'tipo'        =>'Link'
-                , 'rota'        =>'menu.listAll'
-                , 'icone'       =>'fa fa-list'
-            ],
-            [
-                'uuid'          => Uuid::uuid1()->toString()
-                ,'ordem'         =>'01.002'
-                , 'descricao'   =>'Menu Usuário'
-                , 'tipo'        =>'Link'
-                , 'rota'        =>'menu.menuUsuario'
-                , 'icone'       =>'fas fa-user-cog'
-            ],
-            [
-                'uuid'          => Uuid::uuid1()->toString()
-                ,'ordem'         =>'01.010'
-                , 'descricao'   =>'Moeda'
-                , 'tipo'        =>'Link'
-                , 'rota'        =>'moeda.listAll'
-                , 'icone'       =>'fas fa-donate'
-            ],
-            [
-                'uuid'          => Uuid::uuid1()->toString()
-                ,'ordem'         =>'01.011'
-                , 'descricao'   =>'Produto'
-                , 'tipo'        =>'Link'
-                , 'rota'        =>'produto.listAll'
-                , 'icone'       =>'fas fa-funnel-dollar'
-            ],
 
             [
                 'uuid'          => Uuid::uuid1()->toString()
                 ,'ordem'         =>'02.000'
-                , 'descricao'   =>'Movimento'
+                , 'descricao'   =>'Produção'
                 , 'tipo'        =>'Título'
                 , 'rota'        =>''
                 , 'icone'       =>''
             ],
+
             [
                 'uuid'          => Uuid::uuid1()->toString()
-                ,'ordem'         =>'02.001'
-                , 'descricao'   =>'Orçamento'
-                , 'tipo'        =>'Link'
-                , 'rota'        =>'orcamento.listAll'
-                , 'icone'       =>'fas fa-hand-holding-usd'
+                ,'ordem'         =>'03.000'
+                , 'descricao'   =>'Apontamento de Produção'
+                , 'tipo'        =>'Título'
+                , 'rota'        =>''
+                , 'icone'       =>''
             ],
+
 
         ];
 
