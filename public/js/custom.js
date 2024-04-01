@@ -352,6 +352,60 @@ $(document).ready(function () {
         $(document).find('#total'+id).val(valor_total);
 
     })
+
+    /**********************gravar Maquina **************************************************/
+    $(document).on('submit', 'form#cadastro-maquina', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var Maquina = $(this).find('#Maquina').val();
+
+        /********************************************************************************************* */
+        if(!Maquina){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'Maquina'            : Maquina
+            }
+            // console.log(dados,route,type,origem);
+            cadastrar(dados,route,type,origem);
+
+        }
+    })
+    /**********************gravar produto **************************************************/
+    $(document).on('submit', 'form#cadastro-produto', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var Produto = $(this).find('#Produto').val();
+        var QntGrade = $(this).find('#QntGrade').val();
+        var CodPro = $(this).find('#CodPro').val();
+
+        /********************************************************************************************* */
+        if(!Produto){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'Produto'            : Produto
+                ,'QntGrade'          : QntGrade
+                ,'CodPro'            : CodPro
+            }
+            // console.log(dados,route,type,origem);
+            cadastrar(dados,route,type,origem);
+
+        }
+    })
+
 })
-
-

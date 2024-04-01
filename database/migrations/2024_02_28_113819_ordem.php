@@ -17,13 +17,9 @@ class Ordem extends Migration
             $table->increments('CodOrdem');
             $table->date('DataInicio')->nullable();
             $table->date('DataConclusao')->nullable();
-            $table->integer('CodProd')->nullable();
-            $table->integer('CodMaquina')->nullable();
-            $table->integer('QntProducao')->nullable();
-            $table->integer('QntProduzida')->nullable();
-            $table->integer('QntSaldo')->nullable();
-            $table->string('Status',20)->nullable();
-            $table->integer('CodEncerramento')->nullable();
+            $table->integer('Produto')->nullable();
+            $table->integer('Maquina')->nullable();
+            $table->integer('Quantidade')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

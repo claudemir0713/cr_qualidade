@@ -12,14 +12,9 @@ class ordem extends Model
         'CodOrdem'
         , 'DataInicio'
         , 'DataConclusao'
-        , 'CodProd'
-        , 'CodMaquina'
-        , 'QntProducao'
-        , 'QntProduzida'
-        , 'QntSaldo'
-        , 'Status'
-        , 'CodEncerramento'
-
+        , 'Produto'
+        , 'Maquina'
+        , 'Quantidade'
     ];
     protected $primaryKey = 'CodOrdem';
     protected $table = 'Ordem';

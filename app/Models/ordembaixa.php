@@ -14,7 +14,7 @@ class ordembaixa extends Model
         , 'DataApontamento'
         , 'QntGrade'
         , 'QntPeca'
-        , 'CodOperador'
+        , 'Operador'
 
     ];
     protected $primaryKey = 'CodBaixa';

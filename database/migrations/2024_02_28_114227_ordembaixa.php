@@ -18,7 +18,7 @@ class Ordembaixa extends Migration
         $table->date('DataApontamento')->nullable();
         $table->integer('QntGrade')->nullable();
         $table->integer('QntPeca')->nullable();
-        $table->integer('CodOperador')->nullable();
+        $table->integer('Operador')->nullable();
 
         $table->softDeletes();
         $table->timestamps();
