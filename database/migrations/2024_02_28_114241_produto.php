@@ -12,7 +12,7 @@ class Produto extends Migration
      * @return void
      */
     public function up()
-    {Schema::create('Produto', function(Blueprint $table){
+    {Schema::create('produto', function(Blueprint $table){
         $table->increments('CodProd');
         $table->string('Produto',50)->nullable();
         $table->integer('QntGrade')->nullable();
@@ -30,6 +30,6 @@ class Produto extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Produto');
+        Schema::dropIfExists('produto');
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Produto;
+namespace App\Http\Controllers\produto;
 
 use App\Http\Controllers\Controller;
 use App\Models\produto;
 use Illuminate\Http\Request;
 
-class ProdutoController extends Controller
+class produtoController extends Controller
 {
     public function listAll(Request $request ){
         $filtros = [];
@@ -28,10 +28,10 @@ class ProdutoController extends Controller
     }
     public function strore(Request $request)
     {
+        //  dd($request);
         try{
             $produto = new produto([
-                "CodProd"           => $request->CodProd
-                ,"Produto"          => $request->Produto
+                "Produto"           => $request->Produto
                 ,"QntGrade"         => $request->QntGrade
                 ,"CodPro"           => $request->CodPro
                 ]);
@@ -54,7 +54,7 @@ class ProdutoController extends Controller
         try{
             $produto = produto::find($CodProd);
             $produto->Produto       = $request->Produto;
-            $produto->QntGrade      = $request->QntGrade;
+            $produto->QntGRade      = $request->QntGRade;
             $produto->CodPro        = $request->CodPro;
             $produto->save();
         }catch(\Exception $e){

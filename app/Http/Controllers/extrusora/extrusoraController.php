@@ -60,16 +60,17 @@ class extrusoraController extends Controller
         }
         // DB::connection()->enableQueryLog();
         $extrusoras = extrusora:: leftJoin('users','users.id','extrusora.user_id')
-                                        ->leftJoin('produto','produto.CodProd','extrusora.produjto')
+                                        ->leftJoin('produto','produto.CodProd','extrusora.produto')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
-                                        ->orderBy('id','desc')
+                                        ->orderBy('id_extrusora','desc')
                                         ->get([
                                             'extrusora.id as id_extrusora'
                                             , 'extrusora.user_id'
                                             , 'extrusora.data'
+                                            , 'produto.CodProd'
                                             , 'produto.Produto'
-                                            , 'produto.QtdGrade'
+                                            , 'produto.QntGrade'
                                             , 'produto.CodPro'
                                             , 'extrusora.peso'
                                             , 'extrusora.dim_externa'
@@ -82,7 +83,7 @@ class extrusoraController extends Controller
                                     ]);
         // $queries = DB::getQueryLog();
         // dd($queries);
-        return view('extrusora.listAll' , compact('extrusorsas','filtroDtInicial','filtroDtFinal'));
+        return view('extrusora.listAll' , compact('extrusoras','filtroDtInicial','filtroDtFinal'));
     }
 
     public function formAdd()
@@ -100,7 +101,7 @@ class extrusoraController extends Controller
                 , "id_extrusora"    => $request->id_extrusora
                 , "data"            => $request->data
                 , "Produto"         => $request->Produto
-                , "QtdGrade"        => $request->QtdGrade
+                , "QntGrade"        => $request->QntGrade
                 , "CodPro"          => $request->CodPro
                 , "peso"            => $request->peso
                 , "dim_externa"     => $request->dim_externa
@@ -132,7 +133,7 @@ class extrusoraController extends Controller
             $extrusora->id_extrusora        = $request->id_extrusora;
             $extrusora->data		        = $request->data;
             $extrusora->Produto             = $request->Produto;
-            $extrusora->QtdGrade            = $request->QtdGrade;
+            $extrusora->QntGrade            = $request->QntGrade;
             $extrusora->CodPro              = $request->CodPro;
             $extrusora->peso                = $request->peso;
             $extrusora->dim_externa         = $request->dim_externa;

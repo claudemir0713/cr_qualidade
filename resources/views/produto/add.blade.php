@@ -6,7 +6,7 @@
         @csrf
         @method('patch')
 
-        <input type="hidden" name="route" id="route" value="/Produto/store">
+        <input type="hidden" name="route" id="route" value="/produto/store">
         <input type="hidden" name="type" id="type" value="POST">
         <input type="hidden" name="origem" id="origem" value="Produto">
 

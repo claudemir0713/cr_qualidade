@@ -289,44 +289,44 @@ $(document).ready(function () {
         })
     })
 
-    /**********************gravar produto com ajax **************************************************/
-    $(document).on('submit', 'form#cadastro-produto', function(event){
-        event.preventDefault()
-        var route = $(this).find('input#route').val();
-        var type = $(this).find('input#type').val();
-        var origem =  $(this).find('input#origem').val();
+    // /**********************gravar produto com ajax **************************************************/
+    // $(document).on('submit', 'form#cadastro-produto', function(event){
+    //     event.preventDefault()
+    //     var route = $(this).find('input#route').val();
+    //     var type = $(this).find('input#type').val();
+    //     var origem =  $(this).find('input#origem').val();
 
-        var codigo  = $(this).find('input#codigo').val();
-        var produto  = $(this).find('input#produto').val();
-        var un  = $(this).find('select#un').val();
-        var status  = $(this).find('select#status').val();
-        var custo  = $(this).find('input#custo').val();
-        var quebra  = $(this).find('input#quebra').val();
+    //     var codigo  = $(this).find('input#codigo').val();
+    //     var produto  = $(this).find('input#produto').val();
+    //     var un  = $(this).find('select#un').val();
+    //     var status  = $(this).find('select#status').val();
+    //     var custo  = $(this).find('input#custo').val();
+    //     var quebra  = $(this).find('input#quebra').val();
 
-        custo  = parseFloat(custo.replaceAll('.','').replaceAll(',','.'));
-        quebra  = parseFloat(quebra.replaceAll('.','').replaceAll(',','.'));
-        if(!quebra){quebra = 0;};
+    //     custo  = parseFloat(custo.replaceAll('.','').replaceAll(',','.'));
+    //     quebra  = parseFloat(quebra.replaceAll('.','').replaceAll(',','.'));
+    //     if(!quebra){quebra = 0;};
 
 
-        /********************************************************************************************* */
-        if(!produto || !un || !custo  ){
-            Swal({
-                title: 'Preencha todos os campos obrigatório',
-                type: 'error',
-                timer:3000
-            })
-        }else{
-            var dados= {
-                "codigo" : codigo
-                ,"produto" : produto
-                ,"un" : un
-                ,"custo" : custo
-                ,"quebra" : quebra
-                ,"status" : status
-            }
-            cadastrar(dados,route,type,origem);
-        }
-    })
+    //     /********************************************************************************************* */
+    //     if(!produto || !un || !custo  ){
+    //         Swal({
+    //             title: 'Preencha todos os campos obrigatório',
+    //             type: 'error',
+    //             timer:3000
+    //         })
+    //     }else{
+    //         var dados= {
+    //             "codigo" : codigo
+    //             ,"produto" : produto
+    //             ,"un" : un
+    //             ,"custo" : custo
+    //             ,"quebra" : quebra
+    //             ,"status" : status
+    //         }
+    //         cadastrar(dados,route,type,origem);
+    //     }
+    // })
 
     /***************************atualzia qtd pecas**********************************************************/
     $(document).on('keyup','.qtd_pc_pronta',function(event){

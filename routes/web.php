@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\extrusora\extrusoraController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Maquina\MaquinaController;
 use App\Http\Controllers\menu\menuController;
-use App\Http\Controllers\Produto\ProdutoController;
+use App\Http\Controllers\Produto\produtoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,13 +39,13 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     /********************************** Produto ***************************************************************/
-    Route::group(['namespace' => 'Produto'], function () {
-        Route::get('Produto',[ProdutoController::class,'listAll'])->name('Produto.listAll');
-        Route::get('Produto/novo',[ProdutoController::class,'formadd'])->name('Produto.add');
-        Route::get('Produto/editar/{Produto}',[ProdutoController::class,'formEdit'])->name('Produto.formEdit');
-        Route::post('Produto/store',[ProdutoController::class,'strore'])->name('Produto.store');
-        Route::patch('Produto/edit/{Produto}',[ProdutoController::class,'edit'])->name('Produto.edit');
-        Route::delete('Produto/destroy/{Produto}',[ProdutoController::class,'destroy'])->name('Produto.destroy');
+    Route::group(['namespace' => 'produto'], function () {
+        Route::get('produto',[produtoController::class,'listAll'])->name('produto.listAll');
+        Route::get('produto/novo',[produtoController::class,'formadd'])->name('produto.add');
+        Route::get('produto/editar/{produto}',[produtoController::class,'formEdit'])->name('produto.formEdit');
+        Route::post('produto/store',[produtoController::class,'strore'])->name('produto.store');
+        Route::patch('produto/edit/{produto}',[produtoController::class,'edit'])->name('produto.edit');
+        Route::delete('produto/destroy/{produto}',[produtoController::class,'destroy'])->name('produto.destroy');
     });
 
     /********************************** Maquina ***************************************************************/
@@ -56,6 +57,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('Maquina/edit/{Maquina}',[MaquinaController::class,'edit'])->name('maquina.edit');
         Route::delete('Maquina/destroy/{Maquina}',[MaquinaController::class,'destroy'])->name('Maquina.destroy');
     });
+
+/********************************** Extrusora ***************************************************************/
+Route::group(['namespace' => 'extrusora'], function () {
+    Route::get('extrusora',[extrusoraController::class,'listAll'])->name('extrusora.listAll');
+    Route::get('extrusora/novo',[extrusoraController::class,'formadd'])->name('extrusora.add');
+    Route::get('extrusora/editar/{extrusora}',[extrusoraController::class,'formEdit'])->name('extrusora.formEdit');
+    Route::post('extrusora/store',[extrusoraController::class,'strore'])->name('extrusora.store');
+    Route::patch('extrusora/edit/{extrusora}',[extrusoraController::class,'edit'])->name('extrusora.edit');
+    Route::delete('extrusora/destroy/{extrusora}',[extrusoraController::class,'destroy'])->name('extrusora.destroy');
+});
 
 });
 

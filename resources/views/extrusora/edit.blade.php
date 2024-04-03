@@ -2,7 +2,7 @@
 
 @section('content')
     <h3 class=""><i class="fa fa-address-book"></i> Alteração de Matéria Prima</h3><hr>
-    <form action="" id="cadastro-produto" nome="cadastro-produto" method="post">
+    <form action="" id="cadastro-materiaprima" nome="cadastro-materiaprima" method="post">
         @csrf
         @method('patch')
         <input type="hidden" name="route" id="route" value="/materiaprima/edit/{{$materiaprima->id}}">

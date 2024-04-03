@@ -17,6 +17,6 @@ class produto extends Model
 
     ];
     protected $primaryKey = 'CodProd';
-    protected $table = 'Produto';
+    protected $table = 'produto';
 
 }
