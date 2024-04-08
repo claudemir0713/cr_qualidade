@@ -35,6 +35,8 @@
                     @endforeach
                 </select>
             </div>
+        </div>
+        <div class="row">
             <div class="form-group limpar col-md-2">
                 Peso
                 <input class="form-control limpar" type="text" name="peso" id="peso">
@@ -54,10 +56,6 @@
             <div class="form-group limpar col-md-2">
                 Durometro
                 <input class="form-control limpar" type="text" name="durometro" id="durometro">
-            </div>
-            <div class="form-group limpar col-md-10">
-                Resíduo
-                <input class="form-control limpar" type="text" name="residuo" id="residuo">
             </div>
         </div>
         <div class="row">

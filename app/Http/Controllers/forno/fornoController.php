@@ -63,7 +63,7 @@ class fornoController extends Controller
                                         ->leftJoin('produto','produto.CodProd','forno.produto')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
-                                        ->orderBy('id_extrusora','desc')
+                                        ->orderBy('id_forno','desc')
                                         ->get([
                                             'forno.id as id_forno'
                                             , 'forno.user_id'
@@ -98,9 +98,9 @@ class fornoController extends Controller
         try{
             $forno = new forno([
                 "user_id"           => Auth::user()->id
-                , "id_forno"   => $request->id_forno
+                , "id_forno"        => $request->id_forno
                 , "data"            => $request->data
-                , "Produto"         => $request->Produto
+                , "produto"         => $request->produto
                 , "QntGrade"        => $request->QntGrade
                 , "CodPro"          => $request->CodPro
                 , "peso"            => $request->peso
@@ -119,21 +119,21 @@ class fornoController extends Controller
         return response()->json('success');
     }
 
-    public function formEdit($id)
+    public function formEdit($id_forno)
     {
-        $forno = forno::where('id','=',$id)->first();
+        $fornos = forno::where('id','=',$id_forno)->first();
         $produtos   = produto::orderby('produto')->get();
 
-        return view('forno.edit' , compact('forno','produtos'));
+        return view('forno.edit' , compact('fornos','produtos'));
     }
 
-    public function edit($id, Request $request)
+    public function edit($id_forno, Request $request)
     {
         try{
-            $forno = forno::find($id);
-            $forno->id_forno       = $request->id_forno;
-            $forno->data		         = $request->data;
-            $forno->Produto             = $request->Produto;
+            $forno = forno::find($id_forno);
+            $forno->id_forno            = $request->id_forno;
+            $forno->data		        = $request->data;
+            $forno->produto             = $request->produto;
             $forno->QntGrade            = $request->QntGrade;
             $forno->CodPro              = $request->CodPro;
             $forno->peso                = $request->peso;

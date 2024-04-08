@@ -58,7 +58,6 @@ class extrusoraController extends Controller
             $filtros[]=['extrusora.data','>=',$filtroDtInicial];
             $filtros[]=['extrusora.data','<=',$filtroDtFinal];
         }
-        // DB::connection()->enableQueryLog();
         $extrusoras = extrusora:: leftJoin('users','users.id','extrusora.user_id')
                                         ->leftJoin('produto','produto.CodProd','extrusora.produto')
                                         ->where($filtros)
@@ -77,12 +76,9 @@ class extrusoraController extends Controller
                                             , 'extrusora.dim_parede'
                                             , 'extrusora.vacuo'
                                             , 'extrusora.durometro'
-                                            , 'extrusora.residuo'
                                             , 'extrusora.turno'
                                             , 'users.name'
                                     ]);
-        // $queries = DB::getQueryLog();
-        // dd($queries);
         return view('extrusora.listAll' , compact('extrusoras','filtroDtInicial','filtroDtFinal'));
     }
 
@@ -97,19 +93,15 @@ class extrusoraController extends Controller
     {
         try{
             $extrusora = new extrusora([
-                "user_id"           => Auth::user()->id
-                , "id_extrusora"    => $request->id_extrusora
-                , "data"            => $request->data
-                , "Produto"         => $request->Produto
-                , "QntGrade"        => $request->QntGrade
-                , "CodPro"          => $request->CodPro
+                "data"              => $request->data
+                , "user_id"         => Auth::user()->id
+                , "produto"         => $request->produto
                 , "peso"            => $request->peso
                 , "dim_externa"     => $request->dim_externa
                 , "dim_parede"      => $request->dim_parede
                 , "vacuo"           => $request->vacuo
-                , "residuo"         => $request->residuo
+                , "durometro"       => $request->durometro
                 , "turno"           => $request->turno
-                , "name"            =>$request->name
             ]);
             $extrusora->save();
         }catch(\Exception $e){
@@ -118,28 +110,29 @@ class extrusoraController extends Controller
         return response()->json('success');
     }
 
-    public function formEdit($id)
+    public function formEdit($id_extrusora)
     {
-        $extrusora = extrusora::where('id','=',$id)->first();
+        $extrusoras = extrusora::where('id','=',$id_extrusora)->first();
         $produtos           = produto::orderby('produto')->get();
 
-        return view('extrusora.edit' , compact('extrusora','produtos'));
+        return view('extrusora.edit' , compact('extrusoras','produtos'));
     }
 
-    public function edit($id, Request $request)
+    public function edit($id_extrusora, Request $request)
     {
         try{
-            $extrusora = extrusora::find($id);
+            $extrusora = extrusora::find($id_extrusora);
             $extrusora->id_extrusora        = $request->id_extrusora;
             $extrusora->data		        = $request->data;
             $extrusora->Produto             = $request->Produto;
+            $extrusora->CodProd             = $request->CodProd;
             $extrusora->QntGrade            = $request->QntGrade;
             $extrusora->CodPro              = $request->CodPro;
             $extrusora->peso                = $request->peso;
             $extrusora->dim_externa         = $request->dim_externa;
             $extrusora->dim_parede          = $request->dim_parede;
             $extrusora->vacuo               = $request->vacuo;
-            $extrusora->residuo             = $request->residuo;
+            $extrusora->durometro           = $request->durometro;
             $extrusora->turno               = $request->turno;
             $extrusora->save();
         }catch(\Exception $e){
@@ -148,6 +141,23 @@ class extrusoraController extends Controller
         return response()->json('success');
     }
 
+    // public function upload(Request $request){
+    //     // dd($request);
+    //     $turno=$request->turno;
+    //     $data=$request->data;
+    //     $id=$request->id_extrusora;
+    //     if (!$request->file('arquivo')){
+    //         return redirect()->route('extrusora.anexo',["extrusora"=>$id]);
+    //     }
+    //     $extensao=$request->file('arquivo')->guessExtension();
+    //     $nomearquivo=$data.$turno.'.'.$id;
+    //     $extrusora=extrusora::find($id);
+    //     // dd($extrusora);
+    //     $extrusora->anexo=$nomearquivo;
+    //     $extrusora->save();
 
+    //     $request->file('arquivo')->storeAs('public/'.$turno,$nomearquivo);
+    //     // return redirect()->route('extrusora.extrusoraAnexo',["extrusora"=>$id]);
 
+    // }
 }

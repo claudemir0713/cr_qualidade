@@ -63,15 +63,13 @@ class cargavagaoController extends Controller
                                         ->leftJoin('produto','produto.CodProd','cargavagao.produto')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
-                                        ->orderBy('id_extrusora','desc')
+                                        ->orderBy('id_cargavagao','desc')
                                         ->get([
                                             'cargavagao.id as id_cargavagao'
                                             , 'cargavagao.user_id'
                                             , 'cargavagao.data'
                                             , 'produto.CodProd'
                                             , 'produto.Produto'
-                                            , 'produto.QntGrade'
-                                            , 'produto.CodPro'
                                             , 'cargavagao.peso'
                                             , 'cargavagao.dim_externa'
                                             , 'cargavagao.dim_parede'
@@ -99,9 +97,7 @@ class cargavagaoController extends Controller
                 "user_id"           => Auth::user()->id
                 , "id_cargavagao"   => $request->id_cargavagao
                 , "data"            => $request->data
-                , "Produto"         => $request->Produto
-                , "QntGrade"        => $request->QntGrade
-                , "CodPro"          => $request->CodPro
+                , "produto"         => $request->produto
                 , "peso"            => $request->peso
                 , "dim_externa"     => $request->dim_externa
                 , "dim_parede"      => $request->dim_parede
@@ -117,23 +113,21 @@ class cargavagaoController extends Controller
         return response()->json('success');
     }
 
-    public function formEdit($id)
+    public function formEdit($id_cargavagao)
     {
-        $cargavagao = cargavagao::where('id','=',$id)->first();
+        $cargavagoes = cargavagao::where('id_cargavagao','=',$id_cargavagao)->first();
         $produtos   = produto::orderby('produto')->get();
 
-        return view('cargavagao.edit' , compact('cargavagao','produtos'));
+        return view('cargavagao.edit' , compact('cargavagoes','produtos'));
     }
 
-    public function edit($id, Request $request)
+    public function edit($id_cargavagao, Request $request)
     {
         try{
-            $cargavagao = cargavagao::find($id);
+            $cargavagao = cargavagao::find($id_cargavagao);
             $cargavagao->id_cargavagao       = $request->id_cargavagao;
             $cargavagao->data		         = $request->data;
-            $cargavagao->Produto             = $request->Produto;
-            $cargavagao->QntGrade            = $request->QntGrade;
-            $cargavagao->CodPro              = $request->CodPro;
+            $cargavagao->produto             = $request->produto;
             $cargavagao->peso                = $request->peso;
             $cargavagao->dim_externa         = $request->dim_externa;
             $cargavagao->dim_parede          = $request->dim_parede;

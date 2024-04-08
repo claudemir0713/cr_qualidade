@@ -15,14 +15,13 @@ class CreateExtrusorasTable extends Migration
     {Schema::create('extrusora', function(Blueprint $table){
         $table->increments('id');
         $table->date('data')->nullable();
-        $table->time('user_id')->nullable();
+        $table->integer('user_id')->nullable();
         $table->integer('produto')->nullable();
         $table->integer('peso')->nullable();
         $table->integer('dim_externa')->nullable();
         $table->integer('dim_parede')->nullable();
         $table->integer('vacuo')->nullable();
         $table->integer('durometro')->nullable();
-        $table->integer('residuo')->nullable();
         $table->string('turno',1)->nullable();
 
         $table->softDeletes();

@@ -18,7 +18,6 @@ class extrusora extends Model
         , 'dim_parede'
         , 'vacuo'
         , 'durometro'
-        , 'residuo'
         , 'turno'
 
     ];

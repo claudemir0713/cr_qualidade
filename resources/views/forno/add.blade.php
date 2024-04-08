@@ -1,14 +1,14 @@
 @extends('layouts.model')
 
 @section('content')
-    <h3 class=""><i class="fas fa-laptop"></i> Apontamento de Carga de Vagão</h3><hr>
-    <form action="" id="cadastro-cargavagao" nome="cadastro-cargavagao" method="post">
+    <h3 class=""><i class="fas fa-laptop"></i> Apontamento de Forno</h3><hr>
+    <form action="" id="cadastro-forno" nome="cadastro-forno" method="post">
         @csrf
         @method('patch')
 
-        <input type="hidden" name="route" id="route" value="/cargavagao/store">
+        <input type="hidden" name="route" id="route" value="/forno/store">
         <input type="hidden" name="type" id="type" value="POST">
-        <input type="hidden" name="origem" id="origem" value="cargavagao">
+        <input type="hidden" name="origem" id="origem" value="forno">
 
         <div class="row">
             <div class="form-group limpar col-md-2">
@@ -52,6 +52,12 @@
             </div>
         </div>
         <div class="row">
+            <div class="form-group limpar col-md-10">
+                Residuo
+                <input class="form-control limpar" type="text" name="residuo" id="residuo">
+            </div>
+        </div>
+        <div class="row">
             <div class="form-group col-md-3">
                 <button type="submit" name="salvar" value="" id="salvar" class="btn btn-success btn-block">
                     <span class="fas fa-save"></span> Salvar
@@ -70,7 +76,7 @@
         $(document).ready(function(){
 
             $('button#sair').click(function(){
-                $(location).attr('href',url+'/cargavagao');
+                $(location).attr('href',url+'/forno');
             })
         })
     </script>

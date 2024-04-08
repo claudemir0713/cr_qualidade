@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\extrusora\extrusoraController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Maquina\MaquinaController;
 use App\Http\Controllers\menu\menuController;
 use App\Http\Controllers\Produto\produtoController;
+use App\Http\Controllers\extrusora\extrusoraController;
+use App\Http\Controllers\cargavagao\cargavagaoController;
+use App\Http\Controllers\forno\fornoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -58,15 +60,38 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('Maquina/destroy/{Maquina}',[MaquinaController::class,'destroy'])->name('Maquina.destroy');
     });
 
-/********************************** Extrusora ***************************************************************/
-Route::group(['namespace' => 'extrusora'], function () {
-    Route::get('extrusora',[extrusoraController::class,'listAll'])->name('extrusora.listAll');
-    Route::get('extrusora/novo',[extrusoraController::class,'formadd'])->name('extrusora.add');
-    Route::get('extrusora/editar/{extrusora}',[extrusoraController::class,'formEdit'])->name('extrusora.formEdit');
-    Route::post('extrusora/store',[extrusoraController::class,'strore'])->name('extrusora.store');
-    Route::patch('extrusora/edit/{extrusora}',[extrusoraController::class,'edit'])->name('extrusora.edit');
-    Route::delete('extrusora/destroy/{extrusora}',[extrusoraController::class,'destroy'])->name('extrusora.destroy');
-});
+    /********************************** Extrusora ***************************************************************/
+    Route::group(['namespace' => 'extrusora'], function () {
+        Route::get('extrusora',[extrusoraController::class,'listAll'])->name('extrusora.listAll');
+        Route::get('extrusora/novo',[extrusoraController::class,'formadd'])->name('extrusora.add');
+        Route::get('extrusora/editar/{extrusora}',[extrusoraController::class,'formEdit'])->name('extrusora.formEdit');
+        Route::post('extrusora/store',[extrusoraController::class,'strore'])->name('extrusora.store');
+        Route::patch('extrusora/edit/{extrusora}',[extrusoraController::class,'edit'])->name('extrusora.edit');
+        Route::delete('extrusora/destroy/{extrusora}',[extrusoraController::class,'destroy'])->name('extrusora.destroy');
+
+        // Route::get('extrusora/extrusoraAnexo/{extrusora}',[extrusoraController::class,'extrusoraAnexo'])->name('extrusora.extrusoraAnexo');
+        // Route::post('extrusora/upload',[extrusoraController::class,'upload'])->name('upload');
+    });
+
+    /********************************** CargaVagao ***************************************************************/
+    Route::group(['namespace' => 'cargavagao'], function () {
+        Route::get('cargavagao',[cargavagaoController::class,'listAll'])->name('cargavagao.listAll');
+        Route::get('cargavagao/novo',[cargavagaoController::class,'formadd'])->name('cargavagao.add');
+        Route::get('cargavagao/editar/{cargavagao}',[cargavagaoController::class,'formEdit'])->name('cargavagao.formEdit');
+        Route::post('cargavagao/store',[cargavagaoController::class,'strore'])->name('cargavagao.store');
+        Route::patch('cargavagao/edit/{cargavagao}',[cargavagaoController::class,'edit'])->name('cargavagao.edit');
+        Route::delete('cargavagao/destroy/{cargavagao}',[cargavagaoController::class,'destroy'])->name('cargavagao.destroy');
+    });
+
+    /********************************** Forno ***************************************************************/
+    Route::group(['namespace' => 'forno'], function () {
+        Route::get('forno',[fornoController::class,'listAll'])->name('forno.listAll');
+        Route::get('forno/novo',[fornoController::class,'formadd'])->name('forno.add');
+        Route::get('forno/editar/{forno}',[fornoController::class,'formEdit'])->name('forno.formEdit');
+        Route::post('forno/store',[fornoController::class,'strore'])->name('forno.store');
+        Route::patch('forno/edit/{forno}',[fornoController::class,'edit'])->name('forno.edit');
+        Route::delete('forno/destroy/{forno}',[fornoController::class,'destroy'])->name('forno.destroy');
+    });
 
 });
 

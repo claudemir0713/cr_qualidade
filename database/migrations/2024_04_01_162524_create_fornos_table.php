@@ -15,7 +15,7 @@ class CreateFornosTable extends Migration
     {Schema::create('forno', function(Blueprint $table){
         $table->increments('id');
         $table->date('data')->nullable();
-        $table->time('user_id')->nullable();
+        $table->integer('user_id')->nullable();
         $table->integer('produto')->nullable();
         $table->integer('peso')->nullable();
         $table->integer('dim_externa')->nullable();

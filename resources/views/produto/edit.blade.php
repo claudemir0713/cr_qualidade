@@ -1,26 +1,31 @@
 @extends('layouts.model')
 
 @section('content')
-    <h3 class=""><i class="fa fa-address-book"></i> Alteração de Matéria Prima</h3><hr>
+    <h3 class=""><i class="fa fa-address-book"></i> Alteração de Produto</h3><hr>
     <form action="" id="cadastro-produto" nome="cadastro-produto" method="post">
         @csrf
         @method('patch')
-        <input type="hidden" name="route" id="route" value="/materiaprima/edit/{{$materiaprima->id}}">
+        <input type="hidden" name="route" id="route" value="/produto/edit/{{$produto->CodProd}}">
         <input type="hidden" name="type" id="type" value="PATCH">
-        <input type="hidden" name="origem" id="origem" value="materiaprima">
+        <input type="hidden" name="origem" id="origem" value="produto">
+
         <div class="row">
-            <div class="form-group col-md-4">
-                Matéria Prima
-                <input class="form-control" type="text" name="materiaprima" id="materiaprima" value="{{ $materiaprima->materiaprima }}">
+            <div class="form-group limpar col-md-4">
+                Produto
+                <input class="form-control limpar" type="text" name="Produto" id="Produto" value="{{ $produto->Produto }}">
             </div>
-            <div class="form-group col-md-4">
-                Unidade
-                <input class="form-control" type="text" name="unidade" id="unidade" value="{{ $materiaprima->unidade }}">
+            <div class="form-group col-md-2">
+                Quantidade por Grade
+                <input class="form-control limpar" type="number" name="QntGrade" id="QntGrade" value="{{ $produto->QntGrade }}">
+            </div>
+            <div class="form-group col-md-2">
+                Codigo Produto Senior
+                <input class="form-control limpar" type="text" name="CodPro" id="CodPro" value="{{ $produto->CodPro }}">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-3">
-                <button type="submit" name="salvar" value="{{$materiaprima->id}}" id="salvar" class="btn btn-success btn-block">
+                <button type="submit" name="salvar" value="" id="salvar" class="btn btn-success btn-block">
                     <span class="fas fa-save"></span> Salvar
                 </button>
             </div>
@@ -37,10 +42,9 @@
         $(document).ready(function(){
 
             $('button#sair').click(function(){
-                $(location).attr('href',url+'/materiaprima');
+                $(location).attr('href',url+'/Produto');
             })
         })
-
     </script>
 
 @endsection

@@ -289,45 +289,6 @@ $(document).ready(function () {
         })
     })
 
-    // /**********************gravar produto com ajax **************************************************/
-    // $(document).on('submit', 'form#cadastro-produto', function(event){
-    //     event.preventDefault()
-    //     var route = $(this).find('input#route').val();
-    //     var type = $(this).find('input#type').val();
-    //     var origem =  $(this).find('input#origem').val();
-
-    //     var codigo  = $(this).find('input#codigo').val();
-    //     var produto  = $(this).find('input#produto').val();
-    //     var un  = $(this).find('select#un').val();
-    //     var status  = $(this).find('select#status').val();
-    //     var custo  = $(this).find('input#custo').val();
-    //     var quebra  = $(this).find('input#quebra').val();
-
-    //     custo  = parseFloat(custo.replaceAll('.','').replaceAll(',','.'));
-    //     quebra  = parseFloat(quebra.replaceAll('.','').replaceAll(',','.'));
-    //     if(!quebra){quebra = 0;};
-
-
-    //     /********************************************************************************************* */
-    //     if(!produto || !un || !custo  ){
-    //         Swal({
-    //             title: 'Preencha todos os campos obrigatório',
-    //             type: 'error',
-    //             timer:3000
-    //         })
-    //     }else{
-    //         var dados= {
-    //             "codigo" : codigo
-    //             ,"produto" : produto
-    //             ,"un" : un
-    //             ,"custo" : custo
-    //             ,"quebra" : quebra
-    //             ,"status" : status
-    //         }
-    //         cadastrar(dados,route,type,origem);
-    //     }
-    // })
-
     /***************************atualzia qtd pecas**********************************************************/
     $(document).on('keyup','.qtd_pc_pronta',function(event){
         let qtd_pacotes = $(document).find('#qtd_pacotes').val();
@@ -385,9 +346,9 @@ $(document).ready(function () {
         var type = $(this).find('input#type').val();
         var origem = $(this).find('#origem').val();
 
-        var Produto = $(this).find('#Produto').val();
-        var QntGrade = $(this).find('#QntGrade').val();
-        var CodPro = $(this).find('#CodPro').val();
+        var Produto         = $(this).find('#Produto').val();
+        var QntGrade        = $(this).find('#QntGrade').val();
+        var CodPro          = $(this).find('#CodPro').val();
 
         /********************************************************************************************* */
         if(!Produto){
@@ -402,10 +363,138 @@ $(document).ready(function () {
                 ,'QntGrade'          : QntGrade
                 ,'CodPro'            : CodPro
             }
-            // console.log(dados,route,type,origem);
             cadastrar(dados,route,type,origem);
 
         }
     })
+
+    /**********************gravar extrusora **************************************************/
+    $(document).on('submit', 'form#cadastro-extrusora', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var data            = $(this).find('input#data').val();
+        var user_id         = $(this).find('#user_id').val();
+        var produto         = $(this).find('select#produto').val();
+        var peso            = $(this).find('input#peso').val();
+        var dim_externa     = $(this).find('input#dim_externa').val();
+        var dim_parede      = $(this).find('input#dim_parede').val();
+        var vacuo           = $(this).find('input#vacuo').val();
+        var durometro       = $(this).find('input#durometro').val();
+        var residuo         = $(this).find('input#residuo').val();
+        var turno           = $(this).find('select#turno').val();
+
+        /********************************************************************************************* */
+        if(!data){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'data'            : data
+                ,'user_id'        : user_id
+                ,'produto'        : produto
+                ,'peso'           : peso
+                ,'dim_externa'    : dim_externa
+                ,'dim_parede'     : dim_parede
+                ,'vacuo'          : vacuo
+                ,'durometro'      : durometro
+                ,'residuo'        : residuo
+                ,'turno'          : turno
+            }
+            cadastrar(dados,route,type,origem);
+            // console.log(dados,route,type,origem);
+
+        }
+    })
+
+    /**********************gravar cargavagao **************************************************/
+    $(document).on('submit', 'form#cadastro-cargavagao', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var data            = $(this).find('input#data').val();
+        var user_id         = $(this).find('#user_id').val();
+        var produto         = $(this).find('select#produto').val();
+        var peso            = $(this).find('input#peso').val();
+        var dim_externa     = $(this).find('input#dim_externa').val();
+        var dim_parede      = $(this).find('input#dim_parede').val();
+        var umidade         = $(this).find('input#umidade').val();
+        var resistencia     = $(this).find('input#resistencia').val();
+        var lote            = $(this).find('input#lote').val();
+
+        /********************************************************************************************* */
+        if(!data || !produto){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'data'            : data
+                ,'user_id'        : user_id
+                ,'produto'        : produto
+                ,'peso'           : peso
+                ,'dim_externa'    : dim_externa
+                ,'dim_parede'     : dim_parede
+                ,'umidade'        : umidade
+                ,'resistencia'    : resistencia
+                ,'lote'           : lote
+            }
+            cadastrar(dados,route,type,origem);
+
+        }
+    })
+
+    /**********************gravar forno **************************************************/
+    $(document).on('submit', 'form#cadastro-forno', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var data            = $(this).find('input#data').val();
+        var user_id         = $(this).find('#user_id').val();
+        var produto         = $(this).find('select#produto').val();
+        var peso            = $(this).find('input#peso').val();
+        var dim_externa     = $(this).find('input#dim_externa').val();
+        var dim_parede      = $(this).find('input#dim_parede').val();
+        var umidade         = $(this).find('input#umidade').val();
+        var resistencia     = $(this).find('input#resistencia').val();
+        var lote            = $(this).find('input#lote').val();
+        var residuo         = $(this).find('input#residuo').val();
+
+        /********************************************************************************************* */
+        if(!data || !produto){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'data'            : data
+                ,'user_id'        : user_id
+                ,'produto'        : produto
+                ,'peso'           : peso
+                ,'dim_externa'    : dim_externa
+                ,'dim_parede'     : dim_parede
+                ,'umidade'        : umidade
+                ,'resistencia'    : resistencia
+                ,'lote'           : lote
+                ,'residuo'        : residuo
+            }
+            cadastrar(dados,route,type,origem);
+
+        }
+    })
+
 
 })

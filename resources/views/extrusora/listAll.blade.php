@@ -25,8 +25,8 @@
             <form method="get" action="{{ route('extrusora.listAll') }}">
                 @csrf
                     <div class="form-group col-md-4">
-                        Maquina
-                        <input class="form-control" type="text" name="maquina" id="Maquina">
+                        Data
+                        <input class="form-control" type="text" name="data" id="data">
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" >
@@ -48,24 +48,22 @@
                 <th width="5%">Dimensao Externa</th>
                 <th width="5%">Dimensao da Parede</th>
                 <th width="5%">Vacuo</th>
-                <th width="5%">Durometo</th>
-                <th width="5%">Residuo</th>
+                <th width="5%">Durometro</th>
                 <th width="5%"></th>
             </tr>
         </thead>
         <tbody>
             @foreach ($extrusoras as $extrusora)
                 <tr>
-                    <td> {{ $extrusora->data }} </td>
+                    <td> {{ date('d/m/Y', strtotime($extrusora->data)) }} </td>
                     <td> {{ $extrusora->turno }} </td>
-                    <td> {{ $extrusora->user_id }} </td>
-                    <td> {{ $extrusora->produto }} </td>
+                    <td> {{ $extrusora->name }} </td>
+                    <td> {{ $extrusora->Produto }} </td>
                     <td> {{ $extrusora->peso }} </td>
                     <td> {{ $extrusora->dim_externa }} </td>
                     <td> {{ $extrusora->dim_parede }} </td>
                     <td> {{ $extrusora->vacuo }} </td>
-                    <td> {{ $extrusora->durometo }} </td>
-                    <td> {{ $extrusora->residuo }} </td>
+                    <td> {{ $extrusora->durometro }} </td>
                     <td>
                         <div class="btn-group-vertical">
                             <div class="btn-group">
@@ -74,7 +72,7 @@
                                 <span>Ação</span>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('extrusora.formEdit', $extrusora->id)}}">
+                                <a class="dropdown-item" href="{{route('extrusora.formEdit', $extrusora->id_extrusora)}}">
                                     <i class="far fa-edit"></i>&nbsp;&nbsp;&nbsp;
                                     <span>Editar</span>
                                 </a>
