@@ -41,8 +41,8 @@
         <thead>
             <tr>
                 <th width="5%">Data</th>
-                <th width="5%">Lote</th>
                 <th width="10%">Operador</th>
+                <th width="5%">Lote</th>
                 <th width="10%">Produto</th>
                 <th width="5%">Peso</th>
                 <th width="5%">Dimensao Externa</th>
@@ -56,8 +56,8 @@
             @foreach ($cargavagoes as $cargavagao)
                 <tr>
                     <td> {{ date('d/m/Y', strtotime($cargavagao->data)) }} </td>
-                    <td> {{ $cargavagao->turno }} </td>
                     <td> {{ $cargavagao->name }} </td>
+                    <td> {{ $cargavagao->lote }} </td>
                     <td> {{ $cargavagao->Produto }} </td>
                     <td> {{ $cargavagao->peso }} </td>
                     <td> {{ $cargavagao->dim_externa }} </td>
