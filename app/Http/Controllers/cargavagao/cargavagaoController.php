@@ -21,26 +21,26 @@ class cargavagaoController extends Controller
         $filtrouser = $user->id;
         $userSelecionado = $request->user;
 
-        $nivel = Auth::user()->nivel;
-        if($nivel!='admin'){
-            $filtros[]=['cargavagao.user_id','=',$user->id];
-        };
-        if($nivel=='admin'){
-            $user = user::where('ativo','S')->orderBy('name')->get();
-            $filtrouser = $user;
-            $filtrouser  = ($request->get('user'))? $request->user : session('filtrouser');
+        // $nivel = Auth::user()->nivel;
+        // if($nivel!='admin'){
+        //     $filtros[]=['cargavagao.user_id','=',$user->id];
+        // };
+        // if($nivel=='admin'){
+        //     $user = user::where('ativo','S')->orderBy('name')->get();
+        //     $filtrouser = $user;
+        //     $filtrouser  = ($request->get('user'))? $request->user : session('filtrouser');
 
-            if($userSelecionado=="0"){ $filtrouser = "0";};
+        //     if($userSelecionado=="0"){ $filtrouser = "0";};
 
-            session()->put('filtrouser', $filtrouser);
+        //     session()->put('filtrouser', $filtrouser);
 
-            if($filtrouser>0){
-                $filtros[]=['cargavagao.user_id','=',$filtrouser];
-            }
-        }else{
-            $filtros[]=['cargavagao.user_id','>','0'];
-            $user = user::where('Id','=',$user)->get();
-        }
+        //     if($filtrouser>0){
+        //         $filtros[]=['cargavagao.user_id','=',$filtrouser];
+        //     }
+        // }else{
+        //     $filtros[]=['cargavagao.user_id','>','0'];
+        //     $user = user::where('Id','=',$user)->get();
+        // }
 
         $filtroDtInicial  = ($request->get('data'))? $request->get('data') : session('filtroDtInicial');
         session()->put('filtroDtInicial', $filtroDtInicial);
