@@ -11,7 +11,7 @@ class AddNivel extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('ativo',1)->default('S');
-            $table->string('nivel',10)->default('usuario');
+            $table->string('nivel',10)->default('admin');
         });
     }
 
