@@ -42,13 +42,23 @@
                 <input class="form-control limpar" type="text" name="peso" id="peso">
             </div>
             <div class="form-group limpar col-md-2">
-                Dimensões Externas
-                <input class="form-control limpar" type="text" name="dim_externa" id="dim_externa">
+                Altura
+                <input class="form-control limpar" type="text" name="altura" id="altura">
             </div>
             <div class="form-group limpar col-md-2">
-                Dimensão da Parede
+                Largura
+                <input class="form-control limpar" type="text" name="largura" id="largura">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Comprimento
+                <input class="form-control limpar" type="text" name="comprimento" id="comprimento">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Dim. Parede Externa
                 <input class="form-control limpar" type="text" name="dim_parede" id="dim_parede">
             </div>
+        </div>
+            <div class="row">
             <div class="form-group limpar col-md-2">
                 Vacuo
                 <input class="form-control limpar" type="text" name="vacuo" id="vacuo">
@@ -56,6 +66,10 @@
             <div class="form-group limpar col-md-2">
                 Durometro
                 <input class="form-control limpar" type="text" name="durometro" id="durometro">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Umidade
+                <input class="form-control limpar" type="text" name="umidade" id="umidade">
             </div>
         </div>
         <div class="row">

@@ -52,6 +52,21 @@
             </div>
         </div>
         <div class="row">
+            <div class="form-group limpar col-md-2">
+                Perda
+                <input class="form-control limpar" type="text" name="perda" id="perda">
+            </div>
+            <div class="form-group limpar col-md-6">
+                Historico Perda
+                <select class="form-control limpar" type="text" name="historico" id="historico">
+                    <option value="%">Todas</option>
+                    @foreach ($historicos as $historico )
+                        <option value="{{ $historico->id }}">{{ $historico->historico }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row">
             <div class="form-group col-md-3">
                 <button type="submit" name="salvar" value="" id="salvar" class="btn btn-success btn-block">
                     <span class="fas fa-save"></span> Salvar

@@ -19,6 +19,12 @@ class extrusora extends Model
         , 'vacuo'
         , 'durometro'
         , 'turno'
+        , 'altura'
+        , 'largura'
+        , 'comprimento'
+        , 'umidade'
+        , 'lote'
+        , 'anexo'
 
     ];
     protected $primaryKey = 'id';

@@ -19,7 +19,7 @@
                 Lote
                 <input class="form-control limpar" type="text" name="lote" id="lote">
             </div>
-            <div class="form-group limpar col-md-6">
+            <div class="form-group limpar col-md-4">
                 Produto
                 <select class="form-control limpar" type="text" name="produto" id="produto">
                     <option value="%">Todas</option>
@@ -35,26 +35,31 @@
                 <input class="form-control limpar" type="text" name="peso" id="peso">
             </div>
             <div class="form-group limpar col-md-2">
-                Dimensões Externas
-                <input class="form-control limpar" type="text" name="dim_externa" id="dim_externa">
-            </div>
-            <div class="form-group limpar col-md-2">
                 Dimensão da Parede
                 <input class="form-control limpar" type="text" name="dim_parede" id="dim_parede">
-            </div>
-            <div class="form-group limpar col-md-2">
-                Umidade
-                <input class="form-control limpar" type="text" name="umidade" id="umidade">
             </div>
             <div class="form-group limpar col-md-2">
                 Resistencia
                 <input class="form-control limpar" type="text" name="resistencia" id="resistencia">
             </div>
+            <div class="form-group limpar col-md-2">
+                Absorção de Águas
+                <input class="form-control limpar" type="text" name="absorcao" id="absorcao">
+            </div>
         </div>
         <div class="row">
-            <div class="form-group limpar col-md-10">
+            <div class="form-group limpar col-md-2">
                 Residuo
                 <input class="form-control limpar" type="text" name="residuo" id="residuo">
+            </div>
+            <div class="form-group limpar col-md-6">
+                Historico de Residuo
+                <select class="form-control limpar" type="text" name="historico" id="historico">
+                    <option value="%">Todas</option>
+                    @foreach ($historicos as $historico )
+                        <option value="{{ $historico->id }}">{{ $historico->historico }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="row">

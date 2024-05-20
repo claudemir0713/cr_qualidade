@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\produto;
 use App\Models\forno;
+use App\Models\historico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -61,6 +62,7 @@ class fornoController extends Controller
         // DB::connection()->enableQueryLog();
         $fornos = forno:: leftJoin('users','users.id','forno.user_id')
                                         ->leftJoin('produto','produto.CodProd','forno.produto')
+                                        ->leftJoin('historico','historico.id','forno.historico')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_forno','desc')
@@ -80,6 +82,8 @@ class fornoController extends Controller
                                             , 'forno.lote'
                                             , 'forno.residuo'
                                             , 'users.name'
+                                            , 'historico.historico'
+                                            , 'forno.absorcao'
                                     ]);
         // $queries = DB::getQueryLog();
         // dd($queries);
@@ -91,7 +95,8 @@ class fornoController extends Controller
         $user_id            = Auth::user()->id;
         $fornos             = forno::orderby('id')->get();
         $produtos           = produto::orderby('produto')->get();
-        return view('forno.add',compact('fornos','produtos'));
+        $historicos         = historico::orderby('historico')->get();
+        return view('forno.add',compact('fornos','produtos','historicos'));
     }
     public function strore(Request $request)
     {
@@ -110,7 +115,9 @@ class fornoController extends Controller
                 , "resistencia"     => $request->resistencia
                 , "lote"            => $request->lote
                 , "residuo"         => $request->residuo
-                , "name"            =>$request->name
+                , "name"            => $request->name
+                , "historico"       => $request->historico
+                , "absorcao"        => $request->absorcao
             ]);
             $forno->save();
         }catch(\Exception $e){
@@ -123,8 +130,9 @@ class fornoController extends Controller
     {
         $fornos = forno::where('id','=',$id_forno)->first();
         $produtos   = produto::orderby('produto')->get();
+        $historicos = historico::orderby('historico')->get();
 
-        return view('forno.edit' , compact('fornos','produtos'));
+        return view('forno.edit' , compact('fornos','produtos','historicos'));
     }
 
     public function edit($id_forno, Request $request)
@@ -143,6 +151,8 @@ class fornoController extends Controller
             $forno->resistencia         = $request->resistencia;
             $forno->lote                = $request->lote;
             $forno->residuo             = $request->residuo;
+            $forno->historico           = $request->historico;
+            $fotno->absorcao            = $request->absorcao;
             $forno->save();
         }catch(\Exception $e){
             return response()->json($forno);

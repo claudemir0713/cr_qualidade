@@ -19,6 +19,8 @@ class cargavagao extends Model
         , 'umidade'
         , 'resistencia'
         , 'lote'
+        , 'perda'
+        , 'historico'
 
     ];
     protected $primaryKey = 'id';

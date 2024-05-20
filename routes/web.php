@@ -7,6 +7,7 @@ use App\Http\Controllers\Produto\produtoController;
 use App\Http\Controllers\extrusora\extrusoraController;
 use App\Http\Controllers\cargavagao\cargavagaoController;
 use App\Http\Controllers\forno\fornoController;
+use App\Http\Controllers\historico\historicoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -69,8 +70,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::patch('extrusora/edit/{extrusora}',[extrusoraController::class,'edit'])->name('extrusora.edit');
         Route::delete('extrusora/destroy/{extrusora}',[extrusoraController::class,'destroy'])->name('extrusora.destroy');
 
-        // Route::get('extrusora/extrusoraAnexo/{extrusora}',[extrusoraController::class,'extrusoraAnexo'])->name('extrusora.extrusoraAnexo');
-        // Route::post('extrusora/upload',[extrusoraController::class,'upload'])->name('upload');
+        Route::get('extrusora/extrusoraAnexo/{extrusora}',[extrusoraController::class,'extrusoraAnexo'])->name('extrusora.extrusoraAnexo');
+        Route::post('extrusora/upload',[extrusoraController::class,'upload'])->name('upload');
+        Route::delete('extrusora/destroyAnexo/{id}',[extrusoraController::class,'destroyAnexo'])->name('extrusora.destroyAnexo');
     });
 
     /********************************** CargaVagao ***************************************************************/
@@ -91,6 +93,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('forno/store',[fornoController::class,'strore'])->name('forno.store');
         Route::patch('forno/edit/{forno}',[fornoController::class,'edit'])->name('forno.edit');
         Route::delete('forno/destroy/{forno}',[fornoController::class,'destroy'])->name('forno.destroy');
+    });
+    /********************************** Historico ***************************************************************/
+    Route::group(['namespace' => 'historico'], function () {
+        Route::get('historico',[historicoController::class,'listAll'])->name('historico.listAll');
+        Route::get('historico/novo',[historicoController::class,'formadd'])->name('historico.add');
+        Route::get('historico/editar/{historico}',[historicoController::class,'formEdit'])->name('historico.formEdit');
+        Route::post('historico/store',[historicoController::class,'strore'])->name('historico.store');
+        Route::patch('historico/edit/{historico}',[historicoController::class,'edit'])->name('historico.edit');
+        Route::delete('historico/destroy/{historico}',[historicoController::class,'destroy'])->name('historico.destroy');
     });
 
 });

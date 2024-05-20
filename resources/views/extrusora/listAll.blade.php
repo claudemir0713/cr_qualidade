@@ -45,10 +45,14 @@
                 <th width="10%">Operador</th>
                 <th width="10%">Produto</th>
                 <th width="5%">Peso</th>
-                <th width="5%">Dimensao Externa</th>
+                <th width="5%">Altura</th>
+                <th width="5%">Largura</th>
+                <th width="5%">Comprimento</th>
                 <th width="5%">Dimensao da Parede</th>
+                <th width="5%">Umidade</th>
                 <th width="5%">Vacuo</th>
                 <th width="5%">Durometro</th>
+                <th width="5%" data-field="name">Upload</th>
                 <th width="5%"></th>
             </tr>
         </thead>
@@ -60,10 +64,21 @@
                     <td> {{ $extrusora->name }} </td>
                     <td> {{ $extrusora->Produto }} </td>
                     <td> {{ $extrusora->peso }} </td>
-                    <td> {{ $extrusora->dim_externa }} </td>
+                    <td> {{ $extrusora->altura }} </td>
+                    <td> {{ $extrusora->largura }} </td>
+                    <td> {{ $extrusora->comprimento }} </td>
                     <td> {{ $extrusora->dim_parede }} </td>
+                    <td> {{ $extrusora->umidade }} </td>
                     <td> {{ $extrusora->vacuo }} </td>
                     <td> {{ $extrusora->durometro }} </td>
+                    <td align="">
+                        @php
+                            ($extrusora->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'
+                        @endphp
+                        <a class="btn btn-{{$tipoBtn}}" href="{{route('extrusora.extrusoraAnexo',$extrusora->id_extrusora)}}" target="_blank">
+                            <i class="fa fa-upload"></i>
+                        </a>
+                    </td>
                     <td>
                         <div class="btn-group-vertical">
                             <div class="btn-group">

@@ -45,11 +45,11 @@
                 <th width="10%">Lote</th>
                 <th width="3%">Produto</th>
                 <th width="3%">Peso</th>
-                <th width="3%">Dimensão Externa</th>
                 <th width="3%">Dimensão da Parede</th>
-                <th width="3%">Umidade</th>
                 <th width="3%">Resistencia</th>
-                <th width="15%">Residuo</th>
+                <th width="3%">Absorcao</th>
+                <th width="3%">Residuo</th>
+                <th width="10%">Historico</th>
                 <th width="1%"></th>
             </tr>
         </thead>
@@ -61,11 +61,11 @@
                     <td> {{ $forno->lote }} </td>
                     <td> {{ $forno->Produto }} </td>
                     <td> {{ $forno->peso }} </td>
-                    <td> {{ $forno->dim_externa }} </td>
                     <td> {{ $forno->dim_parede }} </td>
-                    <td> {{ $forno->umidade }} </td>
                     <td> {{ $forno->resistencia }} </td>
+                    <td> {{ $forno->absorcao }} </td>
                     <td> {{ $forno->residuo }} </td>
+                    <td> {{ $forno->historico }} </td>
                     <td>
                         <div class="btn-group-vertical">
                             <div class="btn-group">

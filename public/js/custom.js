@@ -385,6 +385,10 @@ $(document).ready(function () {
         var durometro       = $(this).find('input#durometro').val();
         var residuo         = $(this).find('input#residuo').val();
         var turno           = $(this).find('select#turno').val();
+        var altura          = $(this).find('input#altura').val();
+        var largura         = $(this).find('input#largura').val();
+        var comprimento     = $(this).find('input#comprimento').val();
+        var umidade         = $(this).find('input#umidade').val();
 
         /********************************************************************************************* */
         if(!data){
@@ -405,6 +409,10 @@ $(document).ready(function () {
                 ,'durometro'      : durometro
                 ,'residuo'        : residuo
                 ,'turno'          : turno
+                ,'altura'         : altura
+                ,'largura'        : largura
+                ,'comprimento'    : comprimento
+                ,'umidade'        : umidade
             }
             cadastrar(dados,route,type,origem);
             // console.log(dados,route,type,origem);
@@ -428,6 +436,8 @@ $(document).ready(function () {
         var umidade         = $(this).find('input#umidade').val();
         var resistencia     = $(this).find('input#resistencia').val();
         var lote            = $(this).find('input#lote').val();
+        var perda           = $(this).find('input#perda').val();
+        var historico       = $(this).find('select#historico').val();
 
         /********************************************************************************************* */
         if(!data || !produto){
@@ -447,6 +457,8 @@ $(document).ready(function () {
                 ,'umidade'        : umidade
                 ,'resistencia'    : resistencia
                 ,'lote'           : lote
+                ,'perda'          : perda
+                ,'historico'      : historico
             }
             cadastrar(dados,route,type,origem);
 
@@ -464,12 +476,12 @@ $(document).ready(function () {
         var user_id         = $(this).find('#user_id').val();
         var produto         = $(this).find('select#produto').val();
         var peso            = $(this).find('input#peso').val();
-        var dim_externa     = $(this).find('input#dim_externa').val();
         var dim_parede      = $(this).find('input#dim_parede').val();
-        var umidade         = $(this).find('input#umidade').val();
         var resistencia     = $(this).find('input#resistencia').val();
+        var absorcao        = $(this).find('input#absorcao').val();
         var lote            = $(this).find('input#lote').val();
         var residuo         = $(this).find('input#residuo').val();
+        var historico       = $(this).find('select#historico').val();
 
         /********************************************************************************************* */
         if(!data || !produto){
@@ -484,16 +496,44 @@ $(document).ready(function () {
                 ,'user_id'        : user_id
                 ,'produto'        : produto
                 ,'peso'           : peso
-                ,'dim_externa'    : dim_externa
                 ,'dim_parede'     : dim_parede
-                ,'umidade'        : umidade
                 ,'resistencia'    : resistencia
+                ,'absorcao'       : absorcao
                 ,'lote'           : lote
                 ,'residuo'        : residuo
+                ,'historico'      : historico
+            }
+            // console.log(dados);
+            cadastrar(dados,route,type,origem);
+
+        }
+
+    })
+
+    /**********************gravar historico **************************************************/
+    $(document).on('submit', 'form#cadastro-historico', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var historico            = $(this).find('input#historico').val();
+
+        /********************************************************************************************* */
+        if(!historico){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'historico'            : historico
             }
             cadastrar(dados,route,type,origem);
 
         }
+
     })
 
 

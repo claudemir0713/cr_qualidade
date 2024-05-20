@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\produto;
 use App\Models\cargavagao;
+use App\Models\historico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -61,6 +62,7 @@ class cargavagaoController extends Controller
         // DB::connection()->enableQueryLog();
         $cargavagoes = cargavagao:: leftJoin('users','users.id','cargavagao.user_id')
                                         ->leftJoin('produto','produto.CodProd','cargavagao.produto')
+                                        ->leftJoin('historico','historico.id','cargavagao.historico')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_cargavagao','desc')
@@ -77,6 +79,8 @@ class cargavagaoController extends Controller
                                             , 'cargavagao.resistencia'
                                             , 'cargavagao.lote'
                                             , 'users.name'
+                                            , 'cargavagao.perda'
+                                            , 'historico.historico'
                                     ]);
         // $queries = DB::getQueryLog();
         // dd($queries);
@@ -88,7 +92,8 @@ class cargavagaoController extends Controller
         $user_id            = Auth::user()->id;
         $cargavagoes        = cargavagao::orderby('id')->get();
         $produtos           = produto::orderby('produto')->get();
-        return view('cargavagao.add',compact('cargavagoes','produtos'));
+        $historicos         = historico::orderby('historico')->get();
+        return view('cargavagao.add',compact('cargavagoes','produtos','historicos'));
     }
     public function strore(Request $request)
     {
@@ -104,7 +109,9 @@ class cargavagaoController extends Controller
                 , "umidade"         => $request->umidade
                 , "resistencia"     => $request->resistencia
                 , "lote"            => $request->lote
-                , "name"            =>$request->name
+                , "name"            => $request->name
+                , "perda"           => $request->perda
+                , "historico"       => $request->historico
             ]);
             $cargavagao->save();
         }catch(\Exception $e){
@@ -115,10 +122,11 @@ class cargavagaoController extends Controller
 
     public function formEdit($id_cargavagao)
     {
-        $cargavagoes = cargavagao::where('id_cargavagao','=',$id_cargavagao)->first();
-        $produtos   = produto::orderby('produto')->get();
+        $cargavagoes = cargavagao::where('id','=',$id_cargavagao)->first();
+        $produtos    = produto::orderby('produto')->get();
+        $historicos  = historico::orderby('historico')->get();
 
-        return view('cargavagao.edit' , compact('cargavagoes','produtos'));
+        return view('cargavagao.edit' , compact('cargavagoes','produtos','historicos'));
     }
 
     public function edit($id_cargavagao, Request $request)
@@ -134,6 +142,8 @@ class cargavagaoController extends Controller
             $cargavagao->umidade             = $request->umidade;
             $cargavagao->resistencia         = $request->resistencia;
             $cargavagao->lote                = $request->lote;
+            $cargavagao->perda               = $request->perda;
+            $cargavagao->historico           = $request->historico;
             $cargavagao->save();
         }catch(\Exception $e){
             return response()->json($cargavagao);

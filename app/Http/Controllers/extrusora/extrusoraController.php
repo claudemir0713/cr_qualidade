@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\produto;
 use App\Models\extrusora;
+use App\Models\extrusora_imagem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -78,6 +79,12 @@ class extrusoraController extends Controller
                                             , 'extrusora.durometro'
                                             , 'extrusora.turno'
                                             , 'users.name'
+                                            , 'extrusora.altura'
+                                            , 'extrusora.largura'
+                                            , 'extrusora.comprimento'
+                                            , 'extrusora.umidade'
+                                            , 'extrusora.lote'
+                                            , DB::raw("(SELECT count(*)  FROM extrusora_imagem WHERE extrusora_id = extrusora.id) qtdAnexo")
                                     ]);
         return view('extrusora.listAll' , compact('extrusoras','filtroDtInicial','filtroDtFinal'));
     }
@@ -91,6 +98,8 @@ class extrusoraController extends Controller
     }
     public function strore(Request $request)
     {
+        $arr_data=explode('-',$request->data);
+        $lote = $arr_data[2].$arr_data[1].substr($arr_data[0],2,2).$request->turno;
         try{
             $extrusora = new extrusora([
                 "data"              => $request->data
@@ -102,6 +111,11 @@ class extrusoraController extends Controller
                 , "vacuo"           => $request->vacuo
                 , "durometro"       => $request->durometro
                 , "turno"           => $request->turno
+                , "altura"          => $request->altura
+                , "largura"         => $request->largura
+                , "comprimento"     => $request->comprimento
+                , "umidade"         => $request->umidade
+                , "lote"            => $lote
             ]);
             $extrusora->save();
         }catch(\Exception $e){
@@ -120,20 +134,23 @@ class extrusoraController extends Controller
 
     public function edit($id_extrusora, Request $request)
     {
+        $arr_data=explode('-',$request->data);
+        $lote = $arr_data[2].$arr_data[1].substr($arr_data[0],2,2).$request->turno;
         try{
             $extrusora = extrusora::find($id_extrusora);
-            $extrusora->id_extrusora        = $request->id_extrusora;
             $extrusora->data		        = $request->data;
-            $extrusora->Produto             = $request->Produto;
-            $extrusora->CodProd             = $request->CodProd;
-            $extrusora->QntGrade            = $request->QntGrade;
-            $extrusora->CodPro              = $request->CodPro;
+            $extrusora->produto             = $request->produto;
             $extrusora->peso                = $request->peso;
             $extrusora->dim_externa         = $request->dim_externa;
             $extrusora->dim_parede          = $request->dim_parede;
             $extrusora->vacuo               = $request->vacuo;
             $extrusora->durometro           = $request->durometro;
             $extrusora->turno               = $request->turno;
+            $extrusora->altura              = $request->altura;
+            $extrusora->largura             = $request->largura;
+            $extrusora->comprimento         = $request->comprimento;
+            $extrusora->umidade             = $request->umidade;
+            $extrusora->lote                = $lote;
             $extrusora->save();
         }catch(\Exception $e){
             return response()->json($extrusora);
@@ -141,23 +158,45 @@ class extrusoraController extends Controller
         return response()->json('success');
     }
 
-    // public function upload(Request $request){
-    //     // dd($request);
-    //     $turno=$request->turno;
-    //     $data=$request->data;
-    //     $id=$request->id_extrusora;
-    //     if (!$request->file('arquivo')){
-    //         return redirect()->route('extrusora.anexo',["extrusora"=>$id]);
-    //     }
-    //     $extensao=$request->file('arquivo')->guessExtension();
-    //     $nomearquivo=$data.$turno.'.'.$id;
-    //     $extrusora=extrusora::find($id);
-    //     // dd($extrusora);
-    //     $extrusora->anexo=$nomearquivo;
-    //     $extrusora->save();
+    public function extrusoraAnexo($extrusora){
+        $extrusoras=extrusora::find($extrusora);
+        $extrusora_imagem=extrusora_imagem::where('extrusora_id',$extrusora)->get();
+        // dd($extrusora);
+        return view('extrusora.anexo',compact('extrusoras','extrusora_imagem'));
+    }
 
-    //     $request->file('arquivo')->storeAs('public/'.$turno,$nomearquivo);
-    //     // return redirect()->route('extrusora.extrusoraAnexo',["extrusora"=>$id]);
+    public function upload(Request $request){
+        // dd($request);
+        $nome=$request->nomeArquivo;
+        $id=$request->extrusora_id;
+        if (!$request->file('arquivo')){
+            return redirect()->route('extrusora.anexo',["extrusora"=>$id]);
+        }
+        $extensao=$request->file('arquivo')->guessExtension();
+        $extrusora=extrusora::find($id);
+        // dd($extrusora,$id);
 
-    // }
+        // dd($extrusora);
+        $extrusora_imagem= new extrusora_imagem([
+            "extrusora_id"=>$id
+        ]);
+        $extrusora_imagem->save();
+        $imagem_id=$extrusora_imagem->id;
+        $nomearquivo=$extrusora->lote.'_'.$imagem_id.'.'.$extensao;
+        $extrusora_imagem=extrusora_imagem::find($imagem_id);
+        $extrusora_imagem->anexo=$nomearquivo;
+        $extrusora_imagem->save();
+
+        $request->file('arquivo')->storeAs('public/'.$extrusora->lote,$nomearquivo);
+        return redirect()->route('extrusora.extrusoraAnexo',["extrusora"=>$id]);
+
+    }
+
+    public function destroyAnexo(Request $request, $id)
+    {
+        $extrusora_id=extrusora_imagem::find($id)->extrusora_id;
+        // dd($extrusora_id);
+        extrusora_imagem::find($id)->delete();
+        return redirect()->route('extrusora.extrusoraAnexo',['extrusora'=>$extrusora_id]);
+    }
 }
