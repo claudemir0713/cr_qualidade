@@ -17,7 +17,12 @@
             </div>
             <div class="form-group limpar col-md-2">
                 Lote
-                <input class="form-control limpar" type="text" name="lote" id="lote">
+                <select class="form-control limpar" type="text" name="lote" id="lote">
+                <option value="%">Todas</option>
+                @foreach ($extrusoras as $item )
+                    <option value="{{ $item->id }}">{{ $item->lote }}</option>
+                @endforeach
+            </select>
             </div>
             <div class="form-group limpar col-md-6">
                 Produto

@@ -5,20 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class laboratorio extends Model
+class forno_imagem extends Model
 {
     use HasFactory;
     protected $fillable= [
         'id'
-        , 'data'
-        , 'user_id'
-        , 'absorcao'
-        , 'peso'
-        , 'resistencia'
-        , 'lote'
-        , 'produto'
+        , 'forno_id'
+        , 'anexo'
+
     ];
     protected $primaryKey = 'id';
-    protected $table = 'laboratorio';
+    protected $table = 'forno_imagem';
 
 }

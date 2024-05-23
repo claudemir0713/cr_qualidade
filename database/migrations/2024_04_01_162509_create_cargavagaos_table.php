@@ -22,7 +22,7 @@ class CreateCargavagaosTable extends Migration
         $table->integer('dim_parede')->nullable();
         $table->integer('umidade')->nullable();
         $table->integer('resistencia')->nullable();
-        $table->string('lote',15)->nullable();
+        $table->integer('lote')->nullable();
 
         $table->softDeletes();
         $table->timestamps();

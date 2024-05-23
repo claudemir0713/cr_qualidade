@@ -1,14 +1,14 @@
 @extends('layouts.model')
 
 @section('content')
-    <h3 class=""><i class="fas fa-laptop"></i> Apontamento de Forno</h3><hr>
-    <form action="" id="cadastro-forno" nome="cadastro-forno" method="post">
+    <h3 class=""><i class="fas fa-laptop"></i> Apontamento de Laboratorio</h3><hr>
+    <form action="" id="cadastro-laboratorio" nome="cadastro-laboratorio" method="post">
         @csrf
         @method('patch')
 
-        <input type="hidden" name="route" id="route" value="/forno/store">
+        <input type="hidden" name="route" id="route" value="/laboratorio/store">
         <input type="hidden" name="type" id="type" value="POST">
-        <input type="hidden" name="origem" id="origem" value="forno">
+        <input type="hidden" name="origem" id="origem" value="laboratorio">
 
         <div class="row">
             <div class="form-group limpar col-md-2">
@@ -36,35 +36,12 @@
         </div>
         <div class="row">
             <div class="form-group limpar col-md-2">
-                Peso
-                <input class="form-control limpar" type="text" name="peso" id="peso">
-            </div>
-            <div class="form-group limpar col-md-2">
-                Dimensão da Parede
-                <input class="form-control limpar" type="text" name="dim_parede" id="dim_parede">
-            </div>
-            <div class="form-group limpar col-md-2">
                 Resistencia
                 <input class="form-control limpar" type="text" name="resistencia" id="resistencia">
             </div>
             <div class="form-group limpar col-md-2">
                 Absorção de Águas
                 <input class="form-control limpar" type="text" name="absorcao" id="absorcao">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group limpar col-md-2">
-                Residuo
-                <input class="form-control limpar" type="text" name="residuo" id="residuo">
-            </div>
-            <div class="form-group limpar col-md-6">
-                Historico de Residuo
-                <select class="form-control limpar" type="text" name="historico" id="historico">
-                    <option value="%">Todas</option>
-                    @foreach ($historicos as $historico )
-                        <option value="{{ $historico->id }}">{{ $historico->historico }}</option>
-                    @endforeach
-                </select>
             </div>
         </div>
         <div class="row">
@@ -86,7 +63,7 @@
         $(document).ready(function(){
 
             $('button#sair').click(function(){
-                $(location).attr('href',url+'/forno');
+                $(location).attr('href',url+'/laboratorio');
             })
         })
     </script>

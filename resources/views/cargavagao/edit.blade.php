@@ -15,7 +15,12 @@
             </div>
             <div class="form-group limpar col-md-2">
                 Lote
-                <input class="form-control limpar" type="text" name="lote" id="lote" value="{{$cargavagoes->lote}}">
+                <select class="form-control limpar" type="text" name="lote" id="lote" >
+                    <option value="%">Todas</option>
+                    @foreach ($extrusoras as $item )
+                        <option value="{{ $item->id }}" {{ $item->id==$cargavagoes->lote ? 'selected' : '' }}>{{ $item->lote }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group limpar col-md-6">
                 Produto
@@ -56,11 +61,12 @@
             </div>
             <div class="form-group limpar col-md-6">
                 Historico Perda
-                <option value="%">Todas</option>
-                @foreach ($historicos as $historico )
-                    <option value="{{ $historico->id }}" {{ $historico->id==$cargavagoes->historico ? 'selected' : '' }}>{{ $historico->historico }}</option>
-                @endforeach
-            </select>
+                <select class="form-control limpar" type="text" name="historico" id="historico" >
+                    <option value="%">Todas</option>
+                    @foreach ($historicos as $historico )
+                        <option value="{{ $historico->id }}" {{ $historico->id==$cargavagoes->historico ? 'selected' : '' }}>{{ $historico->historico }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="row">

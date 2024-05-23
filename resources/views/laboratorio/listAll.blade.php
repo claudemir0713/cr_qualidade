@@ -4,12 +4,12 @@
         <tr>
             <td width="80%">
                 <h3>
-                    <i class="fas fa-laptop"></i> Apontamento de Carga de Vagão
+                    <i class="fas fa-laptop"></i> Apontamento de Laboratorio
                 </h3>
             </td>
             <td width="50%" align="center">
                 <h3>
-                    <a class="cor-digiliza" href="{{route('cargavagao.add')}}">
+                    <a class="cor-digiliza" href="{{route('laboratorio.add')}}">
                         <i class="fas fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;
                         <span>Novo</span>
                     </a>
@@ -22,11 +22,11 @@
     </button><p>
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
-            <form method="get" action="{{ route('cargavagao.listAll') }}">
+            <form method="get" action="{{ route('laboratorio.listAll') }}">
                 @csrf
                     <div class="form-group col-md-4">
-                        Maquina
-                        <input class="form-control" type="text" name="maquina" id="Maquina">
+                        Lote
+                        <input class="form-control" type="text" name="lote" id="lote">
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" >
@@ -42,38 +42,28 @@
             <tr>
                 <th width="5%">Data</th>
                 <th width="10%">Operador</th>
-                <th width="5%">Lote</th>
-                <th width="10%">Produto</th>
-                <th width="5%">Peso</th>
-                <th width="5%">Dimensao Externa</th>
-                <th width="5%">Dimensao da Parede</th>
-                <th width="5%">Umidade</th>
-                <th width="5%">Resistência</th>
-                <th width="5%">Perda</th>
-                <th width="10%">Historico</th>
+                <th width="10%">Lote</th>
+                <th width="3%">Produto</th>
+                <th width="3%">Resistencia</th>
+                <th width="3%">Absorção</th>
                 <th width="5%" data-field="name">Upload</th>
-                <th width="5%"></th>
+                <th width="1%"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($cargavagoes as $cargavagao)
+            @foreach ($laboratorios as $laboratorio)
                 <tr>
-                    <td> {{ date('d/m/Y', strtotime($cargavagao->data)) }} </td>
-                    <td> {{ $cargavagao->name }} </td>
-                    <td> {{ $cargavagao->lote_extrusora }} </td>
-                    <td> {{ $cargavagao->Produto }} </td>
-                    <td> {{ $cargavagao->peso }} </td>
-                    <td> {{ $cargavagao->dim_externa }} </td>
-                    <td> {{ $cargavagao->dim_parede }} </td>
-                    <td> {{ $cargavagao->umidade }} </td>
-                    <td> {{ $cargavagao->resistencia }} </td>
-                    <td> {{ $cargavagao->perda }} </td>
-                    <td> {{ $cargavagao->historico }} </td>
+                    <td> {{ date('d/m/Y', strtotime($laboratorio->data)) }} </td>
+                    <td> {{ $laboratorio->name }} </td>
+                    <td> {{ $laboratorio->lote_extrusora }} </td>
+                    <td> {{ $laboratorio->Produto }} </td>
+                    <td> {{ $laboratorio->resistencia }} </td>
+                    <td> {{ $laboratorio->absorcao }} </td>
                     <td align="">
                         @php
-                            ($cargavagao->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'
+                            ($laboratorio->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'
                         @endphp
-                        <a class="btn btn-{{$tipoBtn}}" href="{{route('cargavagao.cargavagaoAnexo',$cargavagao->id_cargavagao)}}" target="_blank">
+                        <a class="btn btn-{{$tipoBtn}}" href="{{route('laboratorio.laboratorioAnexo',$laboratorio->id_laboratorio)}}" target="_blank">
                             <i class="fa fa-upload"></i>
                         </a>
                     </td>
@@ -85,15 +75,15 @@
                                 <span>Ação</span>
                             </button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="{{route('cargavagao.formEdit', $cargavagao->id_cargavagao)}}">
+                                <a class="dropdown-item" href="{{route('laboratorio.formEdit', $laboratorio->id_laboratorio)}}">
                                     <i class="far fa-edit"></i>&nbsp;&nbsp;&nbsp;
                                     <span>Editar</span>
                                 </a>
                                 <a class="dropdown-item" href="#">
-                                    {{-- <form action=" {{ route('cargavagao.destroy',['cargavagao'=> $cargavagao->id ]) }} " method="POST">
+                                    {{-- <form action=" {{ route('laboratorio.destroy',['laboratorio'=> $laboratorio->id ]) }} " method="POST">
                                         @csrf
                                         @method('delete')
-                                        <input type="hidden" name='cargavagao' value=" {{ $cargavagao->id }} ">
+                                        <input type="hidden" name='laboratorio' value=" {{ $laboratorio->id }} ">
                                         <i class="far fa-trash-alt"></i>
                                         <input type="submit" class="btn btn-default delete"  value="Eliminar"> --}}
                                     </form>

@@ -435,7 +435,7 @@ $(document).ready(function () {
         var dim_parede      = $(this).find('input#dim_parede').val();
         var umidade         = $(this).find('input#umidade').val();
         var resistencia     = $(this).find('input#resistencia').val();
-        var lote            = $(this).find('input#lote').val();
+        var lote            = $(this).find('select#lote').val();
         var perda           = $(this).find('input#perda').val();
         var historico       = $(this).find('select#historico').val();
 
@@ -465,51 +465,6 @@ $(document).ready(function () {
         }
     })
 
-    /**********************gravar forno **************************************************/
-    $(document).on('submit', 'form#cadastro-forno', function(event){
-        event.preventDefault()
-        var route = $(this).find('input#route').val();
-        var type = $(this).find('input#type').val();
-        var origem = $(this).find('#origem').val();
-
-        var data            = $(this).find('input#data').val();
-        var user_id         = $(this).find('#user_id').val();
-        var produto         = $(this).find('select#produto').val();
-        var peso            = $(this).find('input#peso').val();
-        var dim_parede      = $(this).find('input#dim_parede').val();
-        var resistencia     = $(this).find('input#resistencia').val();
-        var absorcao        = $(this).find('input#absorcao').val();
-        var lote            = $(this).find('input#lote').val();
-        var residuo         = $(this).find('input#residuo').val();
-        var historico       = $(this).find('select#historico').val();
-
-        /********************************************************************************************* */
-        if(!data || !produto){
-            Swal({
-                title: 'Preencha todos os campos obrigatório',
-                type: 'error',
-                timer:3000
-            })
-        }else{
-            var dados= {
-                'data'            : data
-                ,'user_id'        : user_id
-                ,'produto'        : produto
-                ,'peso'           : peso
-                ,'dim_parede'     : dim_parede
-                ,'resistencia'    : resistencia
-                ,'absorcao'       : absorcao
-                ,'lote'           : lote
-                ,'residuo'        : residuo
-                ,'historico'      : historico
-            }
-            // console.log(dados);
-            cadastrar(dados,route,type,origem);
-
-        }
-
-    })
-
     /**********************gravar historico **************************************************/
     $(document).on('submit', 'form#cadastro-historico', function(event){
         event.preventDefault()
@@ -530,6 +485,43 @@ $(document).ready(function () {
             var dados= {
                 'historico'            : historico
             }
+            cadastrar(dados,route,type,origem);
+
+        }
+
+    })
+
+     /**********************gravar laboratorio **************************************************/
+     $(document).on('submit', 'form#cadastro-laboratorio', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var data            = $(this).find('input#data').val();
+        var user_id         = $(this).find('#user_id').val();
+        var produto         = $(this).find('select#produto').val();
+        var resistencia     = $(this).find('input#resistencia').val();
+        var absorcao        = $(this).find('input#absorcao').val();
+        var lote            = $(this).find('select#lote').val();
+
+        /********************************************************************************************* */
+        if(!data || !produto){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'data'            : data
+                ,'user_id'        : user_id
+                ,'produto'        : produto
+                ,'resistencia'    : resistencia
+                ,'absorcao'       : absorcao
+                ,'lote'           : lote
+                }
+            // console.log(dados);
             cadastrar(dados,route,type,origem);
 
         }

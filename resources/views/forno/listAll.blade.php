@@ -50,6 +50,7 @@
                 <th width="3%">Absorcao</th>
                 <th width="3%">Residuo</th>
                 <th width="10%">Historico</th>
+                <th width="5%" data-field="name">Upload</th>
                 <th width="1%"></th>
             </tr>
         </thead>
@@ -58,7 +59,7 @@
                 <tr>
                     <td> {{ date('d/m/Y', strtotime($forno->data)) }} </td>
                     <td> {{ $forno->name }} </td>
-                    <td> {{ $forno->lote }} </td>
+                    <td> {{ $forno->lote_extrusora }} </td>
                     <td> {{ $forno->Produto }} </td>
                     <td> {{ $forno->peso }} </td>
                     <td> {{ $forno->dim_parede }} </td>
@@ -66,6 +67,14 @@
                     <td> {{ $forno->absorcao }} </td>
                     <td> {{ $forno->residuo }} </td>
                     <td> {{ $forno->historico }} </td>
+                    <td align="">
+                        @php
+                            ($forno->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'
+                        @endphp
+                        <a class="btn btn-{{$tipoBtn}}" href="{{route('forno.fornoAnexo',$forno->id_forno)}}" target="_blank">
+                            <i class="fa fa-upload"></i>
+                        </a>
+                    </td>
                     <td>
                         <div class="btn-group-vertical">
                             <div class="btn-group">

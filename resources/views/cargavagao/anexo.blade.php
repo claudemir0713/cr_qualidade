@@ -1,6 +1,6 @@
 @extends('layouts.model')
 @section('content')
-    <h3 class=""><i class="fa fa-upload"></i> Lote -> {{$extrusoras->lote}}</h4>
+    <h3 class=""><i class="fa fa-upload"></i> Lote -> {{$cargavagoes->lote_extrusora}}</h4>
     <hr>
     <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -12,7 +12,7 @@
                         <input type="file" class="" name="arquivo" id="arquivo" aria-describedby="" required>
                         {{-- <label class="custom-file-label" for="validatedCustomFile">Selecione....</label> --}}
                         <input type="hidden" name="nomeArquivo" id="nomeArquivo" value="Anexo">
-                        <input type="hidden" name="extrusora_id" id="extrusora_id" value="{{$extrusoras->id}}">
+                        <input type="hidden" name="cargavagao_id" id="cargavagao_id" value="{{$cargavagoes->id}}">
                     </div>
                 </div>
             </div>
@@ -33,16 +33,16 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($extrusora_imagem as $item)
+                    @foreach ($cargavagao_imagem as $item)
                         <tr>
                             <td>
-                                <embed src="{{ asset('storage/'.$extrusoras->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
+                                <embed src="{{ asset('storage/'.$cargavagoes->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
                             </td>
                             <td>
-                                <form action=" {{ route('extrusora.destroyAnexo',['id'=> $item->id]) }} " method="POST">
+                                <form action=" {{ route('cargavagao.destroyAnexo',['id'=> $item->id]) }} " method="POST">
                                     @csrf
                                     @method('delete')
-                                    <input type="hidden" name='extrusora_anexo' value=" {{$item->Id}} ">
+                                    <input type="hidden" name='cargavagao_anexo' value=" {{$item->Id}} ">
                                     <button type="submit" class="btn btn-danger delete">
                                         <i class="far fa-trash-alt"></i>
                                     </button>

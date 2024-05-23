@@ -8,6 +8,7 @@ use App\Http\Controllers\extrusora\extrusoraController;
 use App\Http\Controllers\cargavagao\cargavagaoController;
 use App\Http\Controllers\forno\fornoController;
 use App\Http\Controllers\historico\historicoController;
+use App\Http\Controllers\laboratorio\laboratorioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -83,6 +84,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('cargavagao/store',[cargavagaoController::class,'strore'])->name('cargavagao.store');
         Route::patch('cargavagao/edit/{cargavagao}',[cargavagaoController::class,'edit'])->name('cargavagao.edit');
         Route::delete('cargavagao/destroy/{cargavagao}',[cargavagaoController::class,'destroy'])->name('cargavagao.destroy');
+
+        Route::get('cargavagao/cargavagaoAnexo/{cargavagao}',[cargavagaoController::class,'cargavagaoAnexo'])->name('cargavagao.cargavagaoAnexo');
+        Route::post('cargavagao/upload',[cargavagaoController::class,'upload'])->name('upload');
+        Route::delete('cargavagao/destroyAnexo/{id}',[cargavagaoController::class,'destroyAnexo'])->name('cargavagao.destroyAnexo');
     });
 
     /********************************** Forno ***************************************************************/
@@ -93,6 +98,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('forno/store',[fornoController::class,'strore'])->name('forno.store');
         Route::patch('forno/edit/{forno}',[fornoController::class,'edit'])->name('forno.edit');
         Route::delete('forno/destroy/{forno}',[fornoController::class,'destroy'])->name('forno.destroy');
+
+        Route::get('forno/fornoAnexo/{forno}',[fornoController::class,'fornoAnexo'])->name('forno.fornoAnexo');
+        Route::post('forno/upload',[fornoController::class,'upload'])->name('upload');
+        Route::delete('forno/destroyAnexo/{id}',[fornoController::class,'destroyAnexo'])->name('forno.destroyAnexo');
     });
     /********************************** Historico ***************************************************************/
     Route::group(['namespace' => 'historico'], function () {
@@ -102,6 +111,20 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('historico/store',[historicoController::class,'strore'])->name('historico.store');
         Route::patch('historico/edit/{historico}',[historicoController::class,'edit'])->name('historico.edit');
         Route::delete('historico/destroy/{historico}',[historicoController::class,'destroy'])->name('historico.destroy');
+    });
+
+    /********************************** Laboratorio ***************************************************************/
+    Route::group(['namespace' => 'laboratorio'], function () {
+        Route::get('laboratorio',[laboratorioController::class,'listAll'])->name('laboratorio.listAll');
+        Route::get('laboratorio/novo',[laboratorioController::class,'formadd'])->name('laboratorio.add');
+        Route::get('laboratorio/editar/{laboratorio}',[laboratorioController::class,'formEdit'])->name('laboratorio.formEdit');
+        Route::post('laboratorio/store',[laboratorioController::class,'strore'])->name('laboratorio.store');
+        Route::patch('laboratorio/edit/{laboratorio}',[laboratorioController::class,'edit'])->name('laboratorio.edit');
+        Route::delete('laboratorio/destroy/{laboratorio}',[laboratorioController::class,'destroy'])->name('laboratorio.destroy');
+
+        Route::get('laboratorio/laboratorioAnexo/{laboratorio}',[laboratorioController::class,'laboratorioAnexo'])->name('laboratorio.laboratorioAnexo');
+        Route::post('laboratorio/upload',[laboratorioController::class,'upload'])->name('upload');
+        Route::delete('laboratorio/destroyAnexo/{id}',[laboratorioController::class,'destroyAnexo'])->name('laboratorio.destroyAnexo');
     });
 
 });
