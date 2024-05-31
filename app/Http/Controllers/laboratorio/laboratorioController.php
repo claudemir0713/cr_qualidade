@@ -39,8 +39,8 @@ class laboratorioController extends Controller
         session()->put('dateForm',$dateForm);
 
         $laboratorios = laboratorio:: leftJoin('users','users.id','laboratorio.user_id')
-                                        ->leftJoin('produto','produto.CodProd','laboratorio.produto_id')
                                         ->leftJoin('extrusora','extrusora.id','laboratorio.extrusora_id')
+                                        ->leftJoin('produto','produto.CodProd','laboratorio.produto_id')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_laboratorio','desc')
@@ -56,6 +56,15 @@ class laboratorioController extends Controller
                                             , 'laboratorio.produto_id'
                                             , 'users.name'
                                             , 'extrusora.lote'
+                                            , 'laboratorio.largura'
+                                            , 'laboratorio.altura'
+                                            , 'laboratorio.comprimento'
+                                            , 'laboratorio.parede_ext'
+                                            , 'laboratorio.septos'
+                                            , 'laboratorio.planeza'
+                                            , 'laboratorio.esquadro'
+                                            , 'laboratorio.densidade'
+
                                             , DB::raw("(SELECT count(*)  FROM laboratorio_imagem WHERE laboratorio_id = laboratorio.id) qtdAnexo")
                                     ]);
 
@@ -84,6 +93,14 @@ class laboratorioController extends Controller
                 , "extrusora_id"    => $request->extrusora_id
                 , "produto_id"      => $request->produto_id
                 , "name"            => $request->name
+                , "largura"         => $request->largura
+                , "altura"          => $request->altura
+                , "comprimento"     => $request->comprimento
+                , "parede_ext"      => $request->parede_ext
+                , "septos"          => $request->septos
+                , "planeza"         => $request->planeza
+                , "esquadro"        => $request->esquadro
+                , "densidade"       => $request->densidade
             ]);
             $laboratorio->save();
         }catch(\Exception $e){
@@ -114,6 +131,14 @@ class laboratorioController extends Controller
             $laboratorio->extrusora_id        = $request->extrusora_id;
             $laboratorio->produto_id          = $request->produto_id;
             $laboratorio->name                = $request->name;
+            $laboratorio->largura             = $request->largura;
+            $laboratorio->altura              = $request->altura;
+            $laboratorio->comprimento         = $request->comprimento;
+            $laboratorio->parede_ext          = $request->parede_ext;
+            $laboratorio->septos              = $request->septos;
+            $laboratorio->planeza             = $request->planeza;
+            $laboratorio->esquadro            = $request->esquadro;
+            $laboratorio->densidade           = $request->densidade;
             $laboratorio->save();
         }catch(\Exception $e){
             return response()->json($laboratorio);
@@ -122,7 +147,7 @@ class laboratorioController extends Controller
     }
 
     public function laboratorioAnexo($laboratorio){
-
+        dd($laboratorio);
         $laboratorios=laboratorio::find($laboratorio);
         $extrusora_id = $laboratorios->extrusora_id;
         $extrusoras = extrusora::find($extrusora_id);

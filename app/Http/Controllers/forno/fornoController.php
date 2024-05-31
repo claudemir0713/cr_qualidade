@@ -40,9 +40,9 @@ class fornoController extends Controller
         session()->put('dateForm',$dateForm);
 
         $fornos = forno:: leftJoin('users','users.id','forno.user_id')
-                                        ->leftJoin('produto','produto.CodProd','forno.produto_id')
                                         ->leftJoin('historico','historico.id','forno.historico_id')
                                         ->leftJoin('extrusora','extrusora.id','forno.extrusora_id')
+                                        ->leftJoin('produto','produto.CodProd','forno.produto_id')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_forno','desc')

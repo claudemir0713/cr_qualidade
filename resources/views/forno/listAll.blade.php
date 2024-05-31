@@ -48,7 +48,7 @@
                 <th width="5%">Data</th>
                 <th width="10%">Operador</th>
                 <th width="10%">Lote</th>
-                <th width="3%">Produto</th>
+                <th width="20%">Produto</th>
                 <th width="3%">Peso</th>
                 <th width="3%">Dimensão da Parede</th>
                 <th width="3%">Resistencia</th>
@@ -66,12 +66,12 @@
                     <td> {{ $forno->name }} </td>
                     <td> {{ $forno->lote }} </td>
                     <td> {{ $forno->Produto }} </td>
-                    <td> {{ $forno->peso }} </td>
-                    <td> {{ $forno->dim_parede }} </td>
-                    <td> {{ $forno->resistencia }} </td>
-                    <td> {{ $forno->absorcao }} </td>
-                    <td> {{ $forno->residuo }} </td>
-                    <td> {{ $forno->historico }} </td>
+                    <td align="right"> {{ number_format( $forno->peso,2,',','.')  }} </td>
+                    <td align="right"> {{ number_format( $forno->dim_parede,2,',','.')  }} </td>
+                    <td align="right"> {{ number_format( $forno->resistencia,2,',','.')  }} </td>
+                    <td align="right"> {{ number_format( $forno->absorcao,2,',','.') }} </td>
+                    <td align="right"> {{ number_format( $forno->residuo,2,',','.') }} </td>
+                    <td align="right"> {{ $forno->historico }} </td>
                     <td align="">
                         @php
                             ($forno->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'

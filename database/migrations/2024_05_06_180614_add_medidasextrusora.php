@@ -10,10 +10,10 @@ class AddMedidasextrusora extends Migration
     public function up()
     {
         Schema::table('extrusora', function (Blueprint $table) {
-            $table->integer('altura')->nullable();
-            $table->integer('largura')->nullable();
-            $table->integer('comprimento')->nullable();
-            $table->integer('umidade')->nullable();
+            $table->double('altura',8,2)->nullable();
+            $table->double('largura',8,2)->nullable();
+            $table->double('comprimento',8,2)->nullable();
+            $table->double('umidade',8,2)->nullable();
         });
     }
 

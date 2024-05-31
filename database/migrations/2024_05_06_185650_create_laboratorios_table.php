@@ -16,8 +16,8 @@ class CreateLaboratoriosTable extends Migration
         $table->increments('id');
         $table->date('data')->nullable();
         $table->integer('user_id')->index()->nullable();
-        $table->integer('absorcao')->nullable();
-        $table->integer('resistencia')->nullable();
+        $table->double('absorcao',8,2)->nullable();
+        $table->double('resistencia',8,2)->nullable();
 
         $table->softDeletes();
         $table->timestamps();

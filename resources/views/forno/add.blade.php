@@ -37,25 +37,25 @@
         <div class="row">
             <div class="form-group limpar col-md-2">
                 Peso
-                <input class="form-control limpar" type="text" name="peso" id="peso">
+                <input class="form-control limpar" type="number" step="any" name="peso" id="peso">
             </div>
             <div class="form-group limpar col-md-2">
                 Dimensão da Parede
-                <input class="form-control limpar" type="text" name="dim_parede" id="dim_parede">
+                <input class="form-control limpar" type="number" step="any" name="dim_parede" id="dim_parede">
             </div>
             <div class="form-group limpar col-md-2">
                 Resistencia
-                <input class="form-control limpar" type="text" name="resistencia" id="resistencia">
+                <input class="form-control limpar" type="number" step="any" name="resistencia" id="resistencia">
             </div>
             <div class="form-group limpar col-md-2">
                 Absorção de Águas
-                <input class="form-control limpar" type="text" name="absorcao" id="absorcao">
+                <input class="form-control limpar" type="number" step="any" name="absorcao" id="absorcao">
             </div>
         </div>
         <div class="row">
             <div class="form-group limpar col-md-2">
                 Residuo
-                <input class="form-control limpar" type="text" name="residuo" id="residuo">
+                <input class="form-control limpar" type="number" step="any" name="residuo" id="residuo">
             </div>
             <div class="form-group limpar col-md-6">
                 Historico de Residuo

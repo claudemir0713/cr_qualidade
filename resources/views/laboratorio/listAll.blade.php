@@ -46,6 +46,14 @@
                 <th width="3%">Produto</th>
                 <th width="3%">Resistencia</th>
                 <th width="3%">Absorção</th>
+                <th width="3%">Largura</th>
+                <th width="3%">Altura</th>
+                <th width="3%">Comprimento</th>
+                <th width="3%">Parede Externa</th>
+                <th width="3%">Septos</th>
+                <th width="3%">Planeza</th>
+                <th width="3%">Esquadro</th>
+                <th width="3%">Densidade</th>
                 <th width="5%" data-field="name">Upload</th>
                 <th width="1%"></th>
             </tr>
@@ -57,8 +65,16 @@
                     <td> {{ $laboratorio->name }} </td>
                     <td> {{ $laboratorio->lote }} </td>
                     <td> {{ $laboratorio->Produto }} </td>
-                    <td> {{ $laboratorio->resistencia }} </td>
-                    <td> {{ $laboratorio->absorcao }} </td>
+                    <td align="right"> {{ number_format($laboratorio->resistencia,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->absorcao,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->largura,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->altura,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->comprimento,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->parede_ext,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->septos,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->planeza,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->esquadro,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($laboratorio->densidade,2,',','.') }} </td>
                     <td align="">
                         @php
                             ($laboratorio->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'

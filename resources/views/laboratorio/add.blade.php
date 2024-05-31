@@ -37,11 +37,48 @@
         <div class="row">
             <div class="form-group limpar col-md-2">
                 Resistencia
-                <input class="form-control limpar" type="text" name="resistencia" id="resistencia">
+                <input class="form-control limpar" type="number" step="any" name="resistencia" id="resistencia">
             </div>
             <div class="form-group limpar col-md-2">
-                Absorção de Águas
-                <input class="form-control limpar" type="text" name="absorcao" id="absorcao">
+                Absorção de Água
+                <input class="form-control limpar" type="number" step="any" name="absorcao" id="absorcao">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Largura
+                <input class="form-control limpar" type="number" step="any" name="largura" id="largura">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Altura
+                <input class="form-control limpar" type="number" step="any" name="altura" id="altura">
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="form-group limpar col-md-2">
+                Comprimento
+                <input class="form-control limpar" type="number" step="any" name="comprimento" id="comprimento">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Parede Externa
+                <input class="form-control limpar" type="number" step="any" name="parede_ext" id="parede_ext">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Septos
+                <input class="form-control limpar" type="number" step="any" name="septos" id="septos">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Planeza
+                <input class="form-control limpar" type="number" step="any" name="planeza" id="planeza">
+            </div>
+            </div>
+        <div class="row">
+            <div class="form-group limpar col-md-2">
+                Esquadro
+                <input class="form-control limpar" type="number" step="any" name="esquadro" id="esquadro">
+            </div>
+            <div class="form-group limpar col-md-2">
+                Densidade
+                <input class="form-control limpar" type="number" step="any" name="densidade" id="densidade">
             </div>
         </div>
         <div class="row">

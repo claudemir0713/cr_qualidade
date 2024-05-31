@@ -17,11 +17,11 @@ class CreateExtrusorasTable extends Migration
         $table->date('data')->nullable();
         $table->integer('user_id')->index()->nullable();
         $table->integer('produto_id')->index()->nullable();
-        $table->integer('peso')->nullable();
-        $table->integer('dim_externa')->nullable();
-        $table->integer('dim_parede')->nullable();
-        $table->integer('vacuo')->nullable();
-        $table->integer('durometro')->nullable();
+        $table->double('peso',8,2)->nullable();
+        $table->double('dim_externa',8,2)->nullable();
+        $table->double('dim_parede',8,2)->nullable();
+        $table->double('vacuo',8,2)->nullable();
+        $table->double('durometro',8,2)->nullable();
         $table->string('turno',1)->nullable();
 
         $table->softDeletes();

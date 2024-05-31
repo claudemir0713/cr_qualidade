@@ -40,9 +40,9 @@ class cargavagaoController extends Controller
         session()->put('dateForm',$dateForm);
 
         $cargavagoes = cargavagao:: leftJoin('users','users.id','cargavagao.user_id')
-                                        ->leftJoin('produto','produto.CodProd','cargavagao.produto_id')
                                         ->leftJoin('historico','historico.id','cargavagao.historico_id')
                                         ->leftJoin('extrusora','extrusora.id','cargavagao.extrusora_id')
+                                        ->leftJoin('produto','produto.CodProd','cargavagao.produto_id')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_cargavagao','desc')

@@ -16,6 +16,14 @@ class laboratorio extends Model
         , 'resistencia'
         , 'extrusora_id'
         , 'produto_id'
+        , 'largura'
+        , 'altura'
+        , 'comprimento'
+        , 'parede_ext'
+        , 'septos'
+        , 'planeza'
+        , 'esquadro'
+        , 'densidade'
     ];
     protected $primaryKey = 'id';
     protected $table = 'laboratorio';

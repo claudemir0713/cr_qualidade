@@ -18,9 +18,9 @@ class UserSeeder extends Seeder
         User::truncate();
         $User=[
             [
-                'name' => 'Claudemir Ivanio Conzatti',
-                'email' => 'claudemir@plannersolucoes.com.br',
-                'password' => bcrypt('12345678')
+                'name' => 'Djenifer',
+                'email' => 'qualidade@ceramica',
+                'password' => bcrypt('qualidade123')
             ],
             [
                 'name' => 'Clovis Dorival Conzatti',

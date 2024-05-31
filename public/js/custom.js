@@ -547,6 +547,15 @@ $(document).ready(function () {
         var resistencia     = $(this).find('input#resistencia').val();
         var absorcao        = $(this).find('input#absorcao').val();
         var extrusora_id    = $(this).find('select#extrusora_id').val();
+        var largura         = $(this).find('input#largura').val();
+        var altura          = $(this).find('input#altura').val();
+        var comprimento     = $(this).find('input#comprimento').val();
+        var parede_ext      = $(this).find('input#parede_ext').val();
+        var septos          = $(this).find('input#septos').val();
+        var planeza         = $(this).find('input#planeza').val();
+        var esquadro        = $(this).find('input#esquadro').val();
+        var densidade       = $(this).find('input#densidade').val();
+
 
         /********************************************************************************************* */
         if(!data || !produto_id){
@@ -563,6 +572,14 @@ $(document).ready(function () {
                 ,'resistencia'    : resistencia
                 ,'absorcao'       : absorcao
                 ,'extrusora_id'   : extrusora_id
+                ,'largura'        : largura
+                ,'altura'         : altura
+                ,'comprimento'    : comprimento
+                ,'parede_ext'     : parede_ext
+                ,'septos'         : septos
+                ,'planeza'        : planeza
+                ,'esquadro'       : esquadro
+                ,'densidade'      : densidade
                 }
             // console.log(dados);
             cadastrar(dados,route,type,origem);

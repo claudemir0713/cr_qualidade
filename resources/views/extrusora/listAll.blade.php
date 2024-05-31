@@ -53,7 +53,7 @@
                 <th width="5%">Data</th>
                 <th width="5%">Turno</th>
                 <th width="10%">Operador</th>
-                <th width="10%">Produto</th>
+                <th width="30%">Produto</th>
                 <th width="5%">Peso</th>
                 <th width="5%">Altura</th>
                 <th width="5%">Largura</th>
@@ -73,14 +73,14 @@
                     <td> {{ $extrusora->turno }} </td>
                     <td> {{ $extrusora->name }} </td>
                     <td> {{ $extrusora->Produto }} </td>
-                    <td> {{ $extrusora->peso }} </td>
-                    <td> {{ $extrusora->altura }} </td>
-                    <td> {{ $extrusora->largura }} </td>
-                    <td> {{ $extrusora->comprimento }} </td>
-                    <td> {{ $extrusora->dim_parede }} </td>
-                    <td> {{ $extrusora->umidade }} </td>
-                    <td> {{ $extrusora->vacuo }} </td>
-                    <td> {{ $extrusora->durometro }} </td>
+                    <td align="right"> {{number_format($extrusora->peso,2,',','.')}} </td>
+                    <td align="right"> {{number_format($extrusora->altura,2,',','.')}} </td>
+                    <td align="right"> {{number_format($extrusora->largura,2,',','.')}} </td>
+                    <td align="right"> {{number_format($extrusora->comprimento,2,',','.')}} </td>
+                    <td align="right"> {{number_format($extrusora->dim_parede,2,',','.')}} </td>
+                    <td align="right"> {{number_format($extrusora->umidade,2,',','.')}} </td>
+                    <td align="right"> {{number_format($extrusora->vacuo,2,',','.')}} </td>
+                    <td align="right"> {{number_format($extrusora->durometro,2,',','.')}} </td>
                     <td align="">
                         @php
                             ($extrusora->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'

@@ -48,7 +48,7 @@
                 <th width="5%">Data</th>
                 <th width="10%">Operador</th>
                 <th width="5%">Lote</th>
-                <th width="10%">Produto</th>
+                <th width="30%">Produto</th>
                 <th width="5%">Peso</th>
                 <th width="5%">Dimensao Externa</th>
                 <th width="5%">Dimensao da Parede</th>
@@ -67,13 +67,13 @@
                     <td> {{ $cargavagao->name }} </td>
                     <td> {{ $cargavagao->lote }} </td>
                     <td> {{ $cargavagao->Produto }} </td>
-                    <td> {{ $cargavagao->peso }} </td>
-                    <td> {{ $cargavagao->dim_externa }} </td>
-                    <td> {{ $cargavagao->dim_parede }} </td>
-                    <td> {{ $cargavagao->umidade }} </td>
-                    <td> {{ $cargavagao->resistencia }} </td>
-                    <td> {{ $cargavagao->perda }} </td>
-                    <td> {{ $cargavagao->historico }} </td>
+                    <td align="right"> {{ number_format($cargavagao->peso,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($cargavagao->dim_externa,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($cargavagao->dim_parede,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($cargavagao->umidade,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($cargavagao->resistencia,2,',','.') }} </td>
+                    <td align="right"> {{ number_format($cargavagao->perda,2,',','.') }} </td>
+                    <td align="right"> {{ $cargavagao->historico }} </td>
                     <td align="">
                         @php
                             ($cargavagao->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'

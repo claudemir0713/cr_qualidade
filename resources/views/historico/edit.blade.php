@@ -5,7 +5,7 @@
     <form action="" id="cadastro-historico" nome="cadastro-historico" method="post">
         @csrf
         @method('patch')
-        <input type="hidden" name="route" id="route" value="/historico/edit/{{$historico->id}}">
+        <input type="hidden" name="route" id="route" value="/historico/edit/{{$historico->historico_id}}">
         <input type="hidden" name="type" id="type" value="PATCH">
         <input type="hidden" name="origem" id="origem" value="historico">
         <div class="row">
