@@ -10,7 +10,7 @@ class AddProdutoLaboratorio extends Migration
     public function up()
     {
         Schema::table('laboratorio', function (Blueprint $table) {
-            $table->integer('produto')->nullable();
+            $table->integer('produto_id')->index()->nullable();
         });
     }
 

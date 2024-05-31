@@ -15,7 +15,7 @@ class CreateLaboratoriosTable extends Migration
     {Schema::create('laboratorio', function(Blueprint $table){
         $table->increments('id');
         $table->date('data')->nullable();
-        $table->integer('user_id')->nullable();
+        $table->integer('user_id')->index()->nullable();
         $table->integer('absorcao')->nullable();
         $table->integer('resistencia')->nullable();
 

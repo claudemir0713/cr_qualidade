@@ -12,7 +12,7 @@ class AddMedidaforno extends Migration
         Schema::table('forno', function (Blueprint $table) {
             $table->integer('absorcao')->nullable();
             $table->integer('cod_residuo')->nullable();
-            $table->integer('historico')->nullable();
+            $table->integer('historico_id')->index()->nullable();
         });
     }
 

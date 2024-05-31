@@ -2,7 +2,7 @@
 @section('content')
     <h3 class=""><i class="fa fa-upload"></i> Lote -> {{$extrusoras->lote}}</h4>
     <hr>
-    <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('extrusora.upload') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="form-group col-md-4">
@@ -36,7 +36,7 @@
                     @foreach ($extrusora_imagem as $item)
                         <tr>
                             <td>
-                                <embed src="{{ asset('storage/'.$extrusoras->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
+                                <embed src="{{ asset('storage/extrusora/'.$extrusoras->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
                             </td>
                             <td>
                                 <form action=" {{ route('extrusora.destroyAnexo',['id'=> $item->id]) }} " method="POST">

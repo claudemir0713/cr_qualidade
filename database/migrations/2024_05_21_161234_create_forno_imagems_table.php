@@ -10,7 +10,7 @@ class CreateFornoImagemsTable extends Migration
     {
         Schema::create('forno_imagem', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('forno_id')->nullable();
+            $table->integer('forno_id')->index()->nullable();
             $table->string('anexo',225)->nullable();
 
             $table->softDeletes();

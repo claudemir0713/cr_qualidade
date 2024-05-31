@@ -377,7 +377,7 @@ $(document).ready(function () {
 
         var data            = $(this).find('input#data').val();
         var user_id         = $(this).find('#user_id').val();
-        var produto         = $(this).find('select#produto').val();
+        var produto_id      = $(this).find('select#produto_id').val();
         var peso            = $(this).find('input#peso').val();
         var dim_externa     = $(this).find('input#dim_externa').val();
         var dim_parede      = $(this).find('input#dim_parede').val();
@@ -401,7 +401,7 @@ $(document).ready(function () {
             var dados= {
                 'data'            : data
                 ,'user_id'        : user_id
-                ,'produto'        : produto
+                ,'produto_id'     : produto_id
                 ,'peso'           : peso
                 ,'dim_externa'    : dim_externa
                 ,'dim_parede'     : dim_parede
@@ -429,18 +429,18 @@ $(document).ready(function () {
 
         var data            = $(this).find('input#data').val();
         var user_id         = $(this).find('#user_id').val();
-        var produto         = $(this).find('select#produto').val();
+        var produto_id      = $(this).find('select#produto_id').val();
         var peso            = $(this).find('input#peso').val();
         var dim_externa     = $(this).find('input#dim_externa').val();
         var dim_parede      = $(this).find('input#dim_parede').val();
         var umidade         = $(this).find('input#umidade').val();
         var resistencia     = $(this).find('input#resistencia').val();
-        var lote            = $(this).find('select#lote').val();
+        var extrusora_id    = $(this).find('select#extrusora_id').val();
         var perda           = $(this).find('input#perda').val();
-        var historico       = $(this).find('select#historico').val();
+        var historico_id    = $(this).find('select#historico_id').val();
 
         /********************************************************************************************* */
-        if(!data || !produto){
+        if(!data || !produto_id){
             Swal({
                 title: 'Preencha todos os campos obrigatório',
                 type: 'error',
@@ -450,15 +450,58 @@ $(document).ready(function () {
             var dados= {
                 'data'            : data
                 ,'user_id'        : user_id
-                ,'produto'        : produto
+                ,'produto_id'     : produto_id
                 ,'peso'           : peso
                 ,'dim_externa'    : dim_externa
                 ,'dim_parede'     : dim_parede
                 ,'umidade'        : umidade
                 ,'resistencia'    : resistencia
-                ,'lote'           : lote
+                ,'extrusora_id'   : extrusora_id
                 ,'perda'          : perda
-                ,'historico'      : historico
+                ,'historico_id'   : historico_id
+            }
+            cadastrar(dados,route,type,origem);
+
+        }
+    })
+
+    /**********************gravar forno **************************************************/
+    $(document).on('submit', 'form#cadastro-forno', function(event){
+        event.preventDefault()
+        var route = $(this).find('input#route').val();
+        var type = $(this).find('input#type').val();
+        var origem = $(this).find('#origem').val();
+
+        var data            = $(this).find('input#data').val();
+        var user_id         = $(this).find('#user_id').val();
+        var produto_id      = $(this).find('select#produto_id').val();
+        var peso            = $(this).find('input#peso').val();
+        var dim_parede      = $(this).find('input#dim_parede').val();
+        var resistencia     = $(this).find('input#resistencia').val();
+        var absorcao        = $(this).find('input#absorcao').val();
+        var residuo         = $(this).find('input#residuo').val();
+        var historico_id    = $(this).find('select#historico_id').val();
+        var extrusora_id    = $(this).find('select#extrusora_id').val();
+
+        /********************************************************************************************* */
+        if(!data){
+            Swal({
+                title: 'Preencha todos os campos obrigatório',
+                type: 'error',
+                timer:3000
+            })
+        }else{
+            var dados= {
+                'data'            : data
+                ,'user_id'        : user_id
+                ,'produto_id'     : produto_id
+                ,'peso'           : peso
+                ,'dim_parede'     : dim_parede
+                ,'absorcao'       : absorcao
+                ,'resistencia'    : resistencia
+                ,'extrusora_id'   : extrusora_id
+                ,'residuo'        : residuo
+                ,'historico_id'   : historico_id
             }
             cadastrar(dados,route,type,origem);
 
@@ -500,13 +543,13 @@ $(document).ready(function () {
 
         var data            = $(this).find('input#data').val();
         var user_id         = $(this).find('#user_id').val();
-        var produto         = $(this).find('select#produto').val();
+        var produto_id      = $(this).find('select#produto_id').val();
         var resistencia     = $(this).find('input#resistencia').val();
         var absorcao        = $(this).find('input#absorcao').val();
-        var lote            = $(this).find('select#lote').val();
+        var extrusora_id    = $(this).find('select#extrusora_id').val();
 
         /********************************************************************************************* */
-        if(!data || !produto){
+        if(!data || !produto_id){
             Swal({
                 title: 'Preencha todos os campos obrigatório',
                 type: 'error',
@@ -516,10 +559,10 @@ $(document).ready(function () {
             var dados= {
                 'data'            : data
                 ,'user_id'        : user_id
-                ,'produto'        : produto
+                ,'produto_id'     : produto_id
                 ,'resistencia'    : resistencia
                 ,'absorcao'       : absorcao
-                ,'lote'           : lote
+                ,'extrusora_id'   : extrusora_id
                 }
             // console.log(dados);
             cadastrar(dados,route,type,origem);

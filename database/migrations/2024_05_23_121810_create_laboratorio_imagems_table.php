@@ -10,7 +10,7 @@ class CreateLaboratorioImagemsTable extends Migration
     {
         Schema::create('laboratorio_imagem', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('laboratorio_id')->nullable();
+            $table->integer('laboratorio_id')->index()->nullable();
             $table->string('anexo',225)->nullable();
 
             $table->softDeletes();

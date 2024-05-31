@@ -17,55 +17,32 @@ class cargavagaoController extends Controller
 {
 
     public function listAll(Request $request ){
-
+        $dateForm = $request->except('_token');
+        // dd($dateForm);
         $filtros=[];
 
         $user = user::where('email','=',Auth::user()->email)->first();
         $filtrouser = $user->id;
         $userSelecionado = $request->user;
 
-        // $nivel = Auth::user()->nivel;
-        // if($nivel!='admin'){
-        //     $filtros[]=['cargavagao.user_id','=',$user->id];
-        // };
-        // if($nivel=='admin'){
-        //     $user = user::where('ativo','S')->orderBy('name')->get();
-        //     $filtrouser = $user;
-        //     $filtrouser  = ($request->get('user'))? $request->user : session('filtrouser');
-
-        //     if($userSelecionado=="0"){ $filtrouser = "0";};
-
-        //     session()->put('filtrouser', $filtrouser);
-
-        //     if($filtrouser>0){
-        //         $filtros[]=['cargavagao.user_id','=',$filtrouser];
-        //     }
-        // }else{
-        //     $filtros[]=['cargavagao.user_id','>','0'];
-        //     $user = user::where('Id','=',$user)->get();
-        // }
-
-        $filtroDtInicial  = ($request->get('data'))? $request->get('data') : session('filtroDtInicial');
-        session()->put('filtroDtInicial', $filtroDtInicial);
-        $filtroDtFinal  = ($request->get('data'))? $request->get('data') : session('filtroDtFinal');
-        session()->put('filtroDtFinal', $filtroDtFinal);
-
-        $colaborador  = ($request->get('colaborador'))? $request->get('colaborador') : session('colaborador');
-        session()->put('colaborador', $colaborador);
-
-        if($colaborador){
-            $filtros[]=['users.name','like','%'.$colaborador.'%'];
+        if(array_key_exists('dtI',$dateForm)){
+            if($dateForm['dtI']){
+                $filtros[]=['cargavagao.data','>=',$dateForm['dtI']];
+                session()->put('dtI', $dateForm['dtI']);
+            }
         }
-
-        if($filtroDtFinal){
-            $filtros[]=['cargavagao.data','>=',$filtroDtInicial];
-            $filtros[]=['cargavagao.data','<=',$filtroDtFinal];
+        if(array_key_exists('dtF',$dateForm)){
+            if($dateForm['dtF']){
+                $filtros[]=['cargavagao.data','<=',$dateForm['dtF']];
+                session()->put('dtF', $dateForm['dtF']);
+            }
         }
-        // DB::connection()->enableQueryLog();
+        session()->put('dateForm',$dateForm);
+
         $cargavagoes = cargavagao:: leftJoin('users','users.id','cargavagao.user_id')
-                                        ->leftJoin('produto','produto.CodProd','cargavagao.produto')
-                                        ->leftJoin('historico','historico.id','cargavagao.historico')
-                                        ->leftJoin('extrusora','extrusora.id','cargavagao.lote')
+                                        ->leftJoin('produto','produto.CodProd','cargavagao.produto_id')
+                                        ->leftJoin('historico','historico.id','cargavagao.historico_id')
+                                        ->leftJoin('extrusora','extrusora.id','cargavagao.extrusora_id')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_cargavagao','desc')
@@ -80,16 +57,16 @@ class cargavagaoController extends Controller
                                             , 'cargavagao.dim_parede'
                                             , 'cargavagao.umidade'
                                             , 'cargavagao.resistencia'
-                                            , 'cargavagao.lote'
+                                            , 'cargavagao.extrusora_id'
                                             , 'users.name'
                                             , 'cargavagao.perda'
                                             , 'historico.historico'
-                                            , 'extrusora.lote as lote_extrusora'
+                                            , 'extrusora.lote'
                                             , DB::raw("(SELECT count(*)  FROM cargavagao_imagem WHERE cargavagao_id = cargavagao.id) qtdAnexo")
                                     ]);
         // $queries = DB::getQueryLog();
         // dd($queries);
-        return view('cargavagao.listAll' , compact('cargavagoes','filtroDtInicial','filtroDtFinal'));
+        return view('cargavagao.listAll' , compact('cargavagoes','dateForm'));
     }
 
     public function formAdd()
@@ -108,17 +85,17 @@ class cargavagaoController extends Controller
                 "user_id"           => Auth::user()->id
                 , "id_cargavagao"   => $request->id_cargavagao
                 , "data"            => $request->data
-                , "produto"         => $request->produto
+                , "produto_id"      => $request->produto_id
                 , "peso"            => $request->peso
                 , "dim_externa"     => $request->dim_externa
                 , "dim_parede"      => $request->dim_parede
                 , "umidade"         => $request->umidade
                 , "resistencia"     => $request->resistencia
-                , "lote"            => $request->lote
+                , "extrusora_id"    => $request->extrusora_id
                 , "name"            => $request->name
                 , "perda"           => $request->perda
-                , "historico"       => $request->historico
-                , "lote_extrusora"  => $request->lote_extrusora
+                , "historico_id"    => $request->historico_id
+                , "lote"            => $request->lote
             ]);
             $cargavagao->save();
         }catch(\Exception $e){
@@ -143,16 +120,16 @@ class cargavagaoController extends Controller
             $cargavagao = cargavagao::find($id_cargavagao);
             $cargavagao->id_cargavagao       = $request->id_cargavagao;
             $cargavagao->data		         = $request->data;
-            $cargavagao->produto             = $request->produto;
+            $cargavagao->produto_id          = $request->produto_id;
             $cargavagao->peso                = $request->peso;
             $cargavagao->dim_externa         = $request->dim_externa;
             $cargavagao->dim_parede          = $request->dim_parede;
             $cargavagao->umidade             = $request->umidade;
             $cargavagao->resistencia         = $request->resistencia;
-            $cargavagao->lote                = $request->lote;
+            $cargavagao->extrusora_id        = $request->extrusora_id;
             $cargavagao->perda               = $request->perda;
-            $cargavagao->historico           = $request->historico;
-            $cargavagao->lote_extrusora      = $request->lote_extrusora;
+            $cargavagao->historico_id        = $request->historico_id;
+            $cargavagao->lote                = $request->lote;
             $cargavagao->save();
         }catch(\Exception $e){
             return response()->json($cargavagao);
@@ -160,10 +137,13 @@ class cargavagaoController extends Controller
         return response()->json('success');
     }
     public function cargavagaoAnexo($cargavagao){
+
         $cargavagoes=cargavagao::find($cargavagao);
+        $extrusora_id = $cargavagoes->extrusora_id;
+        $extrusoras = extrusora::find($extrusora_id);
         $cargavagao_imagem=cargavagao_imagem::where('cargavagao_id',$cargavagao)->get();
         // dd($cargavagao);
-        return view('cargavagao.anexo',compact('cargavagoes','cargavagao_imagem'));
+        return view('cargavagao.anexo',compact('cargavagoes','cargavagao_imagem','extrusoras'));
     }
 
     public function upload(Request $request){
@@ -175,20 +155,20 @@ class cargavagaoController extends Controller
         }
         $extensao=$request->file('arquivo')->guessExtension();
         $cargavagao=cargavagao::find($id);
-        // dd($cargavagao,$id);
+        $extrusora_id = $cargavagao->extrusora_id;
+        $extrusora=extrusora::find($extrusora_id);
 
-        // dd($cargavagao);
         $cargavagao_imagem= new cargavagao_imagem([
             "cargavagao_id"=>$id
         ]);
         $cargavagao_imagem->save();
         $imagem_id=$cargavagao_imagem->id;
-        $nomearquivo=$cargavagao->lote_extrusora.'_'.$imagem_id.'.'.$extensao;
+        $nomearquivo=$cargavagao->lote.'_'.$imagem_id.'.'.$extensao;
         $cargavagao_imagem=cargavagao_imagem::find($imagem_id);
         $cargavagao_imagem->anexo=$nomearquivo;
         $cargavagao_imagem->save();
 
-        $request->file('arquivo')->storeAs('public/'.$cargavagao->lote,$nomearquivo);
+        $request->file('arquivo')->storeAs('public/cargaVagao/'.$extrusora->lote,$nomearquivo);
         return redirect()->route('cargavagao.cargavagaoAnexo',["cargavagao"=>$id]);
 
     }

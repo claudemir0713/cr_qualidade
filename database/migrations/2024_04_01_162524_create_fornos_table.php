@@ -15,14 +15,14 @@ class CreateFornosTable extends Migration
     {Schema::create('forno', function(Blueprint $table){
         $table->increments('id');
         $table->date('data')->nullable();
-        $table->integer('user_id')->nullable();
-        $table->integer('produto')->nullable();
+        $table->integer('user_id')->index()->nullable();
+        $table->integer('produto_id')->index()->nullable();
+        $table->integer('extrusora_id')->index()->nullable();
         $table->integer('peso')->nullable();
         $table->integer('dim_externa')->nullable();
         $table->integer('dim_parede')->nullable();
         $table->integer('umidade')->nullable();
         $table->integer('resistencia')->nullable();
-        $table->string('lote',15)->nullable();
         $table->string('residuo',100)->nullable();
 
         $table->softDeletes();

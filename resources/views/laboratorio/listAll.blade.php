@@ -55,7 +55,7 @@
                 <tr>
                     <td> {{ date('d/m/Y', strtotime($laboratorio->data)) }} </td>
                     <td> {{ $laboratorio->name }} </td>
-                    <td> {{ $laboratorio->lote_extrusora }} </td>
+                    <td> {{ $laboratorio->lote }} </td>
                     <td> {{ $laboratorio->Produto }} </td>
                     <td> {{ $laboratorio->resistencia }} </td>
                     <td> {{ $laboratorio->absorcao }} </td>

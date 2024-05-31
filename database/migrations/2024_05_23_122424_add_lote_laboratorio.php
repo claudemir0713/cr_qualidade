@@ -10,7 +10,7 @@ class AddLoteLaboratorio extends Migration
     public function up()
     {
         Schema::table('laboratorio', function (Blueprint $table) {
-            $table->integer('lote')->nullable();
+            $table->integer('extrusora_id')->index()->nullable();
         });
     }
 

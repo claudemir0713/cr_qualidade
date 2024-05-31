@@ -10,57 +10,43 @@ use App\Models\extrusora_imagem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class extrusoraController extends Controller
 {
 
     public function listAll(Request $request ){
-
+        $dateForm = $request->except('_token');
+        // dd($dateForm);
         $filtros=[];
 
         $user = user::where('email','=',Auth::user()->email)->first();
         $filtrouser = $user->id;
         $userSelecionado = $request->user;
 
-        // $nivel = Auth::user()->nivel;
-        // if($nivel!='admin'){
-        //     $filtros[]=['extrusora.user_id','=',$user->id];
-        // };
-        // if($nivel=='admin'){
-        //     $user = user::where('ativo','S')->orderBy('name')->get();
-        //     $filtrouser = $user;
-        //     $filtrouser  = ($request->get('user'))? $request->user : session('filtrouser');
-
-        //     if($userSelecionado=="0"){ $filtrouser = "0";};
-
-        //     session()->put('filtrouser', $filtrouser);
-
-        //     if($filtrouser>0){
-        //         $filtros[]=['extrusora.user_id','=',$filtrouser];
-        //     }
-        // }else{
-        //     $filtros[]=['extrusora.user_id','>','0'];
-        //     $user = user::where('Id','=',$user)->get();
-        // }
-
-        $filtroDtInicial  = ($request->get('data'))? $request->get('data') : session('filtroDtInicial');
-        session()->put('filtroDtInicial', $filtroDtInicial);
-        $filtroDtFinal  = ($request->get('data'))? $request->get('data') : session('filtroDtFinal');
-        session()->put('filtroDtFinal', $filtroDtFinal);
-
-        $colaborador  = ($request->get('colaborador'))? $request->get('colaborador') : session('colaborador');
-        session()->put('colaborador', $colaborador);
-
-        if($colaborador){
-            $filtros[]=['users.name','like','%'.$colaborador.'%'];
+        if(array_key_exists('dtI',$dateForm)){
+            if($dateForm['dtI']){
+                $filtros[]=['extrusora.data','>=',$dateForm['dtI']];
+                session()->put('dtI', $dateForm['dtI']);
+            }
         }
-
-        if($filtroDtFinal){
-            $filtros[]=['extrusora.data','>=',$filtroDtInicial];
-            $filtros[]=['extrusora.data','<=',$filtroDtFinal];
+        if(array_key_exists('dtF',$dateForm)){
+            if($dateForm['dtF']){
+                $filtros[]=['extrusora.data','<=',$dateForm['dtF']];
+                session()->put('dtF', $dateForm['dtF']);
+            }
         }
+        if(array_key_exists('lote',$dateForm)){
+            if($dateForm['lote']){
+                $filtros=[];
+                $filtros[]=['extrusora.lote','=',$dateForm['lote']];
+                session()->put('lote', $dateForm['lote']);
+            }
+        }
+        session()->put('dateForm',$dateForm);
+
         $extrusoras = extrusora:: leftJoin('users','users.id','extrusora.user_id')
-                                        ->leftJoin('produto','produto.CodProd','extrusora.produto')
+                                        ->leftJoin('produto','produto.CodProd','extrusora.produto_id')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_extrusora','desc')
@@ -86,7 +72,7 @@ class extrusoraController extends Controller
                                             , 'extrusora.lote'
                                             , DB::raw("(SELECT count(*)  FROM extrusora_imagem WHERE extrusora_id = extrusora.id) qtdAnexo")
                                     ]);
-        return view('extrusora.listAll' , compact('extrusoras','filtroDtInicial','filtroDtFinal'));
+        return view('extrusora.listAll' , compact('extrusoras','dateForm'));
     }
 
     public function formAdd()
@@ -104,7 +90,7 @@ class extrusoraController extends Controller
             $extrusora = new extrusora([
                 "data"              => $request->data
                 , "user_id"         => Auth::user()->id
-                , "produto"         => $request->produto
+                , "produto_id"      => $request->produto_id
                 , "peso"            => $request->peso
                 , "dim_externa"     => $request->dim_externa
                 , "dim_parede"      => $request->dim_parede
@@ -139,7 +125,7 @@ class extrusoraController extends Controller
         try{
             $extrusora = extrusora::find($id_extrusora);
             $extrusora->data		        = $request->data;
-            $extrusora->produto             = $request->produto;
+            $extrusora->produto_id          = $request->produto_id;
             $extrusora->peso                = $request->peso;
             $extrusora->dim_externa         = $request->dim_externa;
             $extrusora->dim_parede          = $request->dim_parede;
@@ -187,7 +173,7 @@ class extrusoraController extends Controller
         $extrusora_imagem->anexo=$nomearquivo;
         $extrusora_imagem->save();
 
-        $request->file('arquivo')->storeAs('public/'.$extrusora->lote,$nomearquivo);
+        $request->file('arquivo')->storeAs('public/extrusora/'.$extrusora->lote,$nomearquivo);
         return redirect()->route('extrusora.extrusoraAnexo',["extrusora"=>$id]);
 
     }

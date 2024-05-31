@@ -10,7 +10,7 @@ class CreateCargavagaoImagemsTable extends Migration
     {
         Schema::create('cargavagao_imagem', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('cargavagao_id')->nullable();
+            $table->integer('cargavagao_id')->index()->nullable();
             $table->string('anexo',225)->nullable();
 
             $table->softDeletes();

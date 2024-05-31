@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Eder Bonessi',
                 'email' => 'eder@ceramicalorenzetti.com.br',
-                'password' => bcrypt('123456')
+                'password' => bcrypt('12345678')
             ]
         ];
         User::insert($User);

@@ -28,7 +28,7 @@
             </div>
             <div class="form-group limpar col-md-6">
                 Produto
-                <select class="form-control limpar" type="text" name="produto" id="produto">
+                <select class="form-control limpar" type="text" name="produto_id" id="produto_id">
                     <option value="%">Todas</option>
                     @foreach ($produtos as $produto )
                         <option value="{{ $produto->CodProd }}">{{ $produto->Produto }}</option>

@@ -24,9 +24,14 @@
         <div class="card card-body">
             <form method="get" action="{{ route('cargavagao.listAll') }}">
                 @csrf
-                    <div class="form-group col-md-4">
-                        Maquina
-                        <input class="form-control" type="text" name="maquina" id="Maquina">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        Data Incial
+                        <input class="form-control" type="date" name="dtI" id="dtI" value="{{array_key_exists('dtI',$dateForm) ? $dateForm['dtI'] : ''}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        Data Final
+                        <input class="form-control" type="date" name="dtF" id="dtF" value="{{array_key_exists('dtF',$dateForm) ? $dateForm['dtF'] : ''}}">
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" >
@@ -60,7 +65,7 @@
                 <tr>
                     <td> {{ date('d/m/Y', strtotime($cargavagao->data)) }} </td>
                     <td> {{ $cargavagao->name }} </td>
-                    <td> {{ $cargavagao->lote_extrusora }} </td>
+                    <td> {{ $cargavagao->lote }} </td>
                     <td> {{ $cargavagao->Produto }} </td>
                     <td> {{ $cargavagao->peso }} </td>
                     <td> {{ $cargavagao->dim_externa }} </td>

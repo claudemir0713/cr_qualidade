@@ -1,6 +1,6 @@
 @extends('layouts.model')
 @section('content')
-    <h3 class=""><i class="fa fa-upload"></i> Laboratorio -> {{$laboratorios->lote_extrusora}}</h4>
+    <h3 class=""><i class="fa fa-upload"></i> Laboratorio -> {{$laboratorios->lote}}</h4>
     <hr>
     <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -36,13 +36,13 @@
                     @foreach ($laboratorio_imagem as $item)
                         <tr>
                             <td>
-                                <embed src="{{ asset('storage/'.$laboratorios->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
+                                <embed src="{{ asset('storage/laboratorio/'.$laboratorios->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
                             </td>
                             <td>
                                 <form action=" {{ route('laboratorio.destroyAnexo',['id'=> $item->id]) }} " method="POST">
                                     @csrf
                                     @method('delete')
-                                    <input type="hidden" name='laboratorio_anexo' value=" {{$item->Id}} ">
+                                    <input type="hidden" name='laboratorio_anexo' value=" {{$item->id}} ">
                                     <button type="submit" class="btn btn-danger delete">
                                         <i class="far fa-trash-alt"></i>
                                     </button>

@@ -16,54 +16,31 @@ class laboratorioController extends Controller
 {
 
     public function listAll(Request $request ){
-
+        $dateForm = $request->except('_token');
+        // dd($dateForm);
         $filtros=[];
 
         $user = user::where('email','=',Auth::user()->email)->first();
         $filtrouser = $user->id;
         $userSelecionado = $request->user;
 
-        // $nivel = Auth::user()->nivel;
-        // if($nivel!='admin'){
-        //     $filtros[]=['laboratorio.user_id','=',$user->id];
-        // };
-        // if($nivel=='admin'){
-        //     $user = user::where('ativo','S')->orderBy('name')->get();
-        //     $filtrouser = $user;
-        //     $filtrouser  = ($request->get('user'))? $request->user : session('filtrouser');
-
-        //     if($userSelecionado=="0"){ $filtrouser = "0";};
-
-        //     session()->put('filtrouser', $filtrouser);
-
-        //     if($filtrouser>0){
-        //         $filtros[]=['laboratorio.user_id','=',$filtrouser];
-        //     }
-        // }else{
-        //     $filtros[]=['laboratorio.user_id','>','0'];
-        //     $user = user::where('Id','=',$user)->get();
-        // }
-
-        $filtroDtInicial  = ($request->get('data'))? $request->get('data') : session('filtroDtInicial');
-        session()->put('filtroDtInicial', $filtroDtInicial);
-        $filtroDtFinal  = ($request->get('data'))? $request->get('data') : session('filtroDtFinal');
-        session()->put('filtroDtFinal', $filtroDtFinal);
-
-        $colaborador  = ($request->get('colaborador'))? $request->get('colaborador') : session('colaborador');
-        session()->put('colaborador', $colaborador);
-
-        if($colaborador){
-            $filtros[]=['users.name','like','%'.$colaborador.'%'];
+        if(array_key_exists('dtI',$dateForm)){
+            if($dateForm['dtI']){
+                $filtros[]=['cargavagao.data','>=',$dateForm['dtI']];
+                session()->put('dtI', $dateForm['dtI']);
+            }
         }
-
-        if($filtroDtFinal){
-            $filtros[]=['laboratorio.data','>=',$filtroDtInicial];
-            $filtros[]=['laboratorio.data','<=',$filtroDtFinal];
+        if(array_key_exists('dtF',$dateForm)){
+            if($dateForm['dtF']){
+                $filtros[]=['cargavagao.data','<=',$dateForm['dtF']];
+                session()->put('dtF', $dateForm['dtF']);
+            }
         }
-        // DB::connection()->enableQueryLog();
+        session()->put('dateForm',$dateForm);
+
         $laboratorios = laboratorio:: leftJoin('users','users.id','laboratorio.user_id')
-                                        ->leftJoin('produto','produto.CodProd','laboratorio.produto')
-                                        ->leftJoin('extrusora','extrusora.id','laboratorio.lote')
+                                        ->leftJoin('produto','produto.CodProd','laboratorio.produto_id')
+                                        ->leftJoin('extrusora','extrusora.id','laboratorio.extrusora_id')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_laboratorio','desc')
@@ -75,14 +52,14 @@ class laboratorioController extends Controller
                                             , 'produto.Produto'
                                             , 'laboratorio.absorcao'
                                             , 'laboratorio.resistencia'
-                                            , 'laboratorio.lote'
-                                            , 'extrusora.lote as lote_extrusora'
+                                            , 'laboratorio.extrusora_id'
+                                            , 'laboratorio.produto_id'
                                             , 'users.name'
+                                            , 'extrusora.lote'
                                             , DB::raw("(SELECT count(*)  FROM laboratorio_imagem WHERE laboratorio_id = laboratorio.id) qtdAnexo")
                                     ]);
-        // $queries = DB::getQueryLog();
-        // dd($queries);
-        return view('laboratorio.listAll' , compact('laboratorios','filtroDtInicial','filtroDtFinal'));
+
+        return view('laboratorio.listAll' , compact('laboratorios','dateForm'));
     }
 
     public function formAdd()
@@ -104,8 +81,8 @@ class laboratorioController extends Controller
                 , "CodPro"          => $request->CodPro
                 , "absorcao"        => $request->absorcao
                 , "resistencia"     => $request->resistencia
-                , "lote"            => $request->lote
-                , "lote_extrusora"  => $request->lote_extrusora
+                , "extrusora_id"    => $request->extrusora_id
+                , "produto_id"      => $request->produto_id
                 , "name"            => $request->name
             ]);
             $laboratorio->save();
@@ -134,8 +111,8 @@ class laboratorioController extends Controller
             $laboratorio->CodPro              = $request->CodPro;
             $laboratorio->absorcao            = $request->absorcao;
             $laboratorio->resistencia         = $request->resistencia;
-            $laboratorio->lote                = $request->lote;
-            $laboratorio->lote_extrusora      = $request->lote_extrusora;
+            $laboratorio->extrusora_id        = $request->extrusora_id;
+            $laboratorio->produto_id          = $request->produto_id;
             $laboratorio->name                = $request->name;
             $laboratorio->save();
         }catch(\Exception $e){
@@ -145,10 +122,13 @@ class laboratorioController extends Controller
     }
 
     public function laboratorioAnexo($laboratorio){
+
         $laboratorios=laboratorio::find($laboratorio);
+        $extrusora_id = $laboratorios->extrusora_id;
+        $extrusoras = extrusora::find($extrusora_id);
         $laboratorio_imagem=laboratorio_imagem::where('laboratorio_id',$laboratorio)->get();
         // dd($laboratorio);
-        return view('laboratorio.anexo',compact('laboratorios','laboratorio_imagem'));
+        return view('laboratorio.anexo',compact('laboratorios','laboratorio_imagem','extrusoras'));
     }
 
     public function upload(Request $request){
@@ -160,20 +140,20 @@ class laboratorioController extends Controller
         }
         $extensao=$request->file('arquivo')->guessExtension();
         $laboratorio=laboratorio::find($id);
-        // dd($laboratorio,$id);
+        $extrusora_id = $laboratorio->extrusora_id;
+        $extrusora=extrusora::find($extrusora_id);
 
-        // dd($laboratorio);
         $laboratorio_imagem= new laboratorio_imagem([
             "laboratorio_id"=>$id
         ]);
         $laboratorio_imagem->save();
         $imagem_id=$laboratorio_imagem->id;
-        $nomearquivo=$laboratorio->lote_extrusora.'_'.$imagem_id.'.'.$extensao;
+        $nomearquivo=$laboratorio->lote.'_'.$imagem_id.'.'.$extensao;
         $laboratorio_imagem=laboratorio_imagem::find($imagem_id);
         $laboratorio_imagem->anexo=$nomearquivo;
         $laboratorio_imagem->save();
 
-        $request->file('arquivo')->storeAs('public/'.$laboratorio->lote,$nomearquivo);
+        $request->file('arquivo')->storeAs('public/laboratorio/'.$extrusora->lote,$nomearquivo);
         return redirect()->route('laboratorio.laboratorioAnexo',["laboratorio"=>$id]);
 
     }

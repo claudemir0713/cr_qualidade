@@ -11,7 +11,7 @@ class AddMedidacargavagao extends Migration
     {
         Schema::table('cargavagao', function (Blueprint $table) {
             $table->integer('perda')->nullable();
-            $table->integer('historico')->nullable();
+            $table->integer('historico_id')->index()->nullable();
         });
     }
 

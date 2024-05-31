@@ -24,14 +24,24 @@
         <div class="card card-body">
             <form method="get" action="{{ route('extrusora.listAll') }}">
                 @csrf
-                    <div class="form-group col-md-4">
-                        Data
-                        <input class="form-control" type="text" name="data" id="data">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        Data Incial
+                        <input class="form-control" type="date" name="dtI" id="dtI" value="{{array_key_exists('dtI',$dateForm) ? $dateForm['dtI'] : ''}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        Data Final
+                        <input class="form-control" type="date" name="dtF" id="dtF" value="{{array_key_exists('dtF',$dateForm) ? $dateForm['dtF'] : ''}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        Lote
+                        <input class="form-control" type="text" name="lote" id="lote" value="{{array_key_exists('lote',$dateForm) ? $dateForm['lote'] : ''}}">
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" >
                     <span class="fas fa-play"></span> Filtrar
                 </button>
+            </div>
             </form >
         </div>
     </div>

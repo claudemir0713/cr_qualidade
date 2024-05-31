@@ -17,55 +17,32 @@ class fornoController extends Controller
 {
 
     public function listAll(Request $request ){
-
+        $dateForm = $request->except('_token');
+        // dd($dateForm);
         $filtros=[];
 
         $user = user::where('email','=',Auth::user()->email)->first();
         $filtrouser = $user->id;
         $userSelecionado = $request->user;
 
-        // $nivel = Auth::user()->nivel;
-        // if($nivel!='admin'){
-        //     $filtros[]=['forno.user_id','=',$user->id];
-        // };
-        // if($nivel=='admin'){
-        //     $user = user::where('ativo','S')->orderBy('name')->get();
-        //     $filtrouser = $user;
-        //     $filtrouser  = ($request->get('user'))? $request->user : session('filtrouser');
-
-        //     if($userSelecionado=="0"){ $filtrouser = "0";};
-
-        //     session()->put('filtrouser', $filtrouser);
-
-        //     if($filtrouser>0){
-        //         $filtros[]=['forno.user_id','=',$filtrouser];
-        //     }
-        // }else{
-        //     $filtros[]=['forno.user_id','>','0'];
-        //     $user = user::where('Id','=',$user)->get();
-        // }
-
-        $filtroDtInicial  = ($request->get('data'))? $request->get('data') : session('filtroDtInicial');
-        session()->put('filtroDtInicial', $filtroDtInicial);
-        $filtroDtFinal  = ($request->get('data'))? $request->get('data') : session('filtroDtFinal');
-        session()->put('filtroDtFinal', $filtroDtFinal);
-
-        $colaborador  = ($request->get('colaborador'))? $request->get('colaborador') : session('colaborador');
-        session()->put('colaborador', $colaborador);
-
-        if($colaborador){
-            $filtros[]=['users.name','like','%'.$colaborador.'%'];
+        if(array_key_exists('dtI',$dateForm)){
+            if($dateForm['dtI']){
+                $filtros[]=['cargavagao.data','>=',$dateForm['dtI']];
+                session()->put('dtI', $dateForm['dtI']);
+            }
         }
-
-        if($filtroDtFinal){
-            $filtros[]=['forno.data','>=',$filtroDtInicial];
-            $filtros[]=['forno.data','<=',$filtroDtFinal];
+        if(array_key_exists('dtF',$dateForm)){
+            if($dateForm['dtF']){
+                $filtros[]=['cargavagao.data','<=',$dateForm['dtF']];
+                session()->put('dtF', $dateForm['dtF']);
+            }
         }
-        // DB::connection()->enableQueryLog();
+        session()->put('dateForm',$dateForm);
+
         $fornos = forno:: leftJoin('users','users.id','forno.user_id')
-                                        ->leftJoin('produto','produto.CodProd','forno.produto')
-                                        ->leftJoin('historico','historico.id','forno.historico')
-                                        ->leftJoin('extrusora','extrusora.id','forno.lote')
+                                        ->leftJoin('produto','produto.CodProd','forno.produto_id')
+                                        ->leftJoin('historico','historico.id','forno.historico_id')
+                                        ->leftJoin('extrusora','extrusora.id','forno.extrusora_id')
                                         ->where($filtros)
                                         ->orderBy('data','desc')
                                         ->orderBy('id_forno','desc')
@@ -80,19 +57,20 @@ class fornoController extends Controller
                                             , 'forno.peso'
                                             , 'forno.dim_externa'
                                             , 'forno.dim_parede'
-                                            , 'forno.umidade'
                                             , 'forno.resistencia'
-                                            , 'forno.lote'
+                                            , 'forno.extrusora_id'
                                             , 'forno.residuo'
                                             , 'users.name'
                                             , 'historico.historico'
                                             , 'forno.absorcao'
-                                            , 'extrusora.lote as lote_extrusora'
+                                            , 'extrusora.lote'
+                                            , 'forno.produto_id'
+                                            , 'forno.historico_id'
                                             , DB::raw("(SELECT count(*)  FROM forno_imagem WHERE forno_id = forno.id) qtdAnexo")
                                     ]);
         // $queries = DB::getQueryLog();
         // dd($queries);
-        return view('forno.listAll' , compact('fornos','filtroDtInicial','filtroDtFinal'));
+        return view('forno.listAll' , compact('fornos','dateForm'));
     }
 
     public function formAdd()
@@ -117,14 +95,15 @@ class fornoController extends Controller
                 , "peso"            => $request->peso
                 , "dim_externa"     => $request->dim_externa
                 , "dim_parede"      => $request->dim_parede
-                , "umidade"         => $request->umidade
                 , "resistencia"     => $request->resistencia
-                , "lote"            => $request->lote
+                , "extrusora_id"    => $request->extrusora_id
                 , "residuo"         => $request->residuo
                 , "name"            => $request->name
                 , "historico"       => $request->historico
                 , "absorcao"        => $request->absorcao
-                , "lote_extrusora"  => $request->lote_extrusora
+                , "lote"            => $request->lote
+                , "produto_id"      => $request->produto_id
+                , "historico_id"    => $request->historico_id
             ]);
             $forno->save();
         }catch(\Exception $e){
@@ -138,6 +117,7 @@ class fornoController extends Controller
         $fornos = forno::where('id','=',$id_forno)->first();
         $produtos   = produto::orderby('produto')->get();
         $historicos = historico::orderby('historico')->get();
+        $extrusoras = extrusora::orderby('id')->get();
 
         return view('forno.edit' , compact('fornos','produtos','historicos'));
     }
@@ -148,19 +128,20 @@ class fornoController extends Controller
             $forno = forno::find($id_forno);
             $forno->id_forno            = $request->id_forno;
             $forno->data		        = $request->data;
-            $forno->produto             = $request->produto;
+            $forno->produto_id          = $request->produto_id;
             $forno->QntGrade            = $request->QntGrade;
             $forno->CodPro              = $request->CodPro;
             $forno->peso                = $request->peso;
             $forno->dim_externa         = $request->dim_externa;
             $forno->dim_parede          = $request->dim_parede;
-            $forno->umidade             = $request->umidade;
             $forno->resistencia         = $request->resistencia;
-            $forno->lote                = $request->lote;
+            $forno->extrusora_id        = $request->extrusora_id;
             $forno->residuo             = $request->residuo;
             $forno->historico           = $request->historico;
             $forno->absorcao            = $request->absorcao;
-            $forno->lote_extrusora      = $request->lote_extrusora;
+            $forno->lote                = $request->lote;
+            $forno->produto_id          = $request->produto_id;
+            $forno->historico_id        = $request->historico_id;
             $forno->save();
         }catch(\Exception $e){
             return response()->json($forno);
@@ -170,9 +151,10 @@ class fornoController extends Controller
 
     public function fornoAnexo($forno){
         $fornos=forno::find($forno);
+        $extrusora_id = $fornos->extrusora_id;
+        $extrusoras = extrusora::find($extrusora_id);
         $forno_imagem=forno_imagem::where('forno_id',$forno)->get();
-        // dd($forno);
-        return view('forno.anexo',compact('fornos','forno_imagem'));
+        return view('forno.anexo',compact('fornos','forno_imagem','extrusoras'));
     }
 
     public function upload(Request $request){
@@ -184,20 +166,20 @@ class fornoController extends Controller
         }
         $extensao=$request->file('arquivo')->guessExtension();
         $forno=forno::find($id);
-        // dd($forno,$id);
+        $extrusora_id = $forno->extrusora_id;
+        $extrusora=extrusora::find($extrusora_id);
 
-        // dd($forno);
         $forno_imagem= new forno_imagem([
             "forno_id"=>$id
         ]);
         $forno_imagem->save();
         $imagem_id=$forno_imagem->id;
-        $nomearquivo=$forno->lote_extrusora.'_'.$imagem_id.'.'.$extensao;
+        $nomearquivo=$forno->lote.'_'.$imagem_id.'.'.$extensao;
         $forno_imagem=forno_imagem::find($imagem_id);
         $forno_imagem->anexo=$nomearquivo;
         $forno_imagem->save();
 
-        $request->file('arquivo')->storeAs('public/'.$forno->lote,$nomearquivo);
+        $request->file('arquivo')->storeAs('public/forno/'.$forno->lote,$nomearquivo);
         return redirect()->route('forno.fornoAnexo',["forno"=>$id]);
 
     }

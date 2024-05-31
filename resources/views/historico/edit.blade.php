@@ -1,11 +1,11 @@
 @extends('layouts.model')
 
 @section('content')
-    <h3 class=""><i class="fa fa-address-book"></i> Alteração de Apontamento na historico</h3><hr>
+    <h3 class=""><i class="fa fa-address-book"></i> Alteração de Historico</h3><hr>
     <form action="" id="cadastro-historico" nome="cadastro-historico" method="post">
         @csrf
         @method('patch')
-        <input type="hidden" name="route" id="route" value="/historico/edit/{{$historico->id_historico}}">
+        <input type="hidden" name="route" id="route" value="/historico/edit/{{$historico->id}}">
         <input type="hidden" name="type" id="type" value="PATCH">
         <input type="hidden" name="origem" id="origem" value="historico">
         <div class="row">

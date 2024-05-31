@@ -12,7 +12,7 @@ class extrusora extends Model
         'id'
         , 'data'
         , 'user_id'
-        , 'produto'
+        , 'produto_id'
         , 'peso'
         , 'dim_externa'
         , 'dim_parede'

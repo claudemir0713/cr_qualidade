@@ -12,15 +12,15 @@ class cargavagao extends Model
         'id'
         , 'data'
         , 'user_id'
-        , 'produto'
+        , 'produto_id'
+        , 'extrusora_id'
         , 'peso'
         , 'dim_externa'
         , 'dim_parede'
         , 'umidade'
         , 'resistencia'
-        , 'lote'
         , 'perda'
-        , 'historico'
+        , 'historico_id'
 
     ];
     protected $primaryKey = 'id';

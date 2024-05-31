@@ -13,10 +13,9 @@ class laboratorio extends Model
         , 'data'
         , 'user_id'
         , 'absorcao'
-        , 'peso'
         , 'resistencia'
-        , 'lote'
-        , 'produto'
+        , 'extrusora_id'
+        , 'produto_id'
     ];
     protected $primaryKey = 'id';
     protected $table = 'laboratorio';

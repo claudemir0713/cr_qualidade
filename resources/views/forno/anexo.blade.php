@@ -1,8 +1,8 @@
 @extends('layouts.model')
 @section('content')
-    <h3 class=""><i class="fa fa-upload"></i> lote -> {{$fornos->lote_extrusora}}</h4>
+    <h3 class=""><i class="fa fa-upload"></i> Lote -> {{$extrusoras->lote}}</h4>
     <hr>
-    <form action="{{ route('upload') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('forno.upload') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="form-group col-md-4">
@@ -36,7 +36,7 @@
                     @foreach ($forno_imagem as $item)
                         <tr>
                             <td>
-                                <embed src="{{ asset('storage/'.$fornos->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
+                                <embed src="{{ asset('storage/forno/'.$extrusoras->lote.'/'.$item->anexo)  }}" type=""  style="width: 100%">
                             </td>
                             <td>
                                 <form action=" {{ route('forno.destroyAnexo',['id'=> $item->id]) }} " method="POST">

@@ -17,7 +17,7 @@
             </div>
             <div class="form-group limpar col-md-2">
                 Lote
-                <select class="form-control limpar" type="text" name="lote" id="lote">
+                <select class="form-control limpar" type="text" name="extrusora_id" id="extrusora_id">
                 <option value="%">Todas</option>
                 @foreach ($extrusoras as $item )
                     <option value="{{ $item->id }}">{{ $item->lote }}</option>
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group limpar col-md-4">
                 Produto
-                <select class="form-control limpar" type="text" name="produto" id="produto">
+                <select class="form-control limpar" type="text" name="produto_id" id="produto_id">
                     <option value="%">Todas</option>
                     @foreach ($produtos as $produto )
                         <option value="{{ $produto->CodProd }}">{{ $produto->Produto }}</option>

@@ -12,17 +12,17 @@ class forno extends Model
         'id'
         , 'data'
         , 'user_id'
-        , 'produto'
+        , 'produto_id'
+        , 'extrusora_id'
         , 'peso'
         , 'dim_externa'
         , 'dim_parede'
         , 'umidade'
         , 'resistencia'
-        , 'lote'
         , 'residuo'
         , 'absorcao'
         , 'cod_residuo'
-        , 'historico'
+        , 'historico_id'
 
 
     ];

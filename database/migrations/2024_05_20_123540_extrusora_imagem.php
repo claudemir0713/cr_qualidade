@@ -10,7 +10,7 @@ class ExtrusoraImagem extends Migration
     {
         Schema::create('extrusora_imagem', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('extrusora_id')->nullable();
+            $table->integer('extrusora_id')->index()->nullable();
             $table->string('anexo',225)->nullable();
 
             $table->softDeletes();

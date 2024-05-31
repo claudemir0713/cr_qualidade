@@ -24,9 +24,14 @@
         <div class="card card-body">
             <form method="get" action="{{ route('forno.listAll') }}">
                 @csrf
-                    <div class="form-group col-md-4">
-                        Lote
-                        <input class="form-control" type="text" name="lote" id="lote">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        Data Incial
+                        <input class="form-control" type="date" name="dtI" id="dtI" value="{{array_key_exists('dtI',$dateForm) ? $dateForm['dtI'] : ''}}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        Data Final
+                        <input class="form-control" type="date" name="dtF" id="dtF" value="{{array_key_exists('dtF',$dateForm) ? $dateForm['dtF'] : ''}}">
                     </div>
                 </div>
                 <button class="btn btn-primary" type="submit" >
@@ -59,7 +64,7 @@
                 <tr>
                     <td> {{ date('d/m/Y', strtotime($forno->data)) }} </td>
                     <td> {{ $forno->name }} </td>
-                    <td> {{ $forno->lote_extrusora }} </td>
+                    <td> {{ $forno->lote }} </td>
                     <td> {{ $forno->Produto }} </td>
                     <td> {{ $forno->peso }} </td>
                     <td> {{ $forno->dim_parede }} </td>
