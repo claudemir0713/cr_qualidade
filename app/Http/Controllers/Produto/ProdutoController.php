@@ -17,7 +17,7 @@ class produtoController extends Controller
             $filtros[]=['produtos.produto','like','%'.$produto.'%'];
         }
 
-        $produtos = produto::where($filtros)->paginate(5);
+        $produtos = produto::where($filtros)->paginate(100);
 
         return view('produto.listAll' , compact('produtos'));
     }
