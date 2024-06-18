@@ -22,6 +22,7 @@
                     <option value="C"{{($extrusoras->turno=='C')? 'selected' :''}}>C</option>
                     <option value="D"{{($extrusoras->turno=='D')? 'selected' :''}}>D</option>
                     <option value="E"{{($extrusoras->turno=='E')? 'selected' :''}}>E</option>
+                    <option value="F"{{($extrusoras->turno=='F')? 'selected' :''}}>F</option>
                 </select>
             </div>
             <div class="form-group limpar col-md-6">
