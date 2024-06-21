@@ -66,6 +66,14 @@ class fornoController extends Controller
                                             , 'extrusora.lote'
                                             , 'forno.produto_id'
                                             , 'forno.historico_id'
+                                            , 'forno_pesoi'
+                                            , 'forno_pesos'
+                                            , 'forno_dim_paredei'
+                                            , 'forno_dim_paredes'
+                                            , 'forno_resistenciai'
+                                            , 'forno_resistencias'
+                                            , 'forno_absorcaoi'
+                                            , 'forno_absorcaos'
                                             , DB::raw("(SELECT count(*)  FROM forno_imagem WHERE forno_id = forno.id) qtdAnexo")
                                     ]);
         // $queries = DB::getQueryLog();
@@ -179,7 +187,8 @@ class fornoController extends Controller
         $forno_imagem->anexo=$nomearquivo;
         $forno_imagem->save();
 
-        $request->file('arquivo')->storeAs('public/forno/'.$forno->lote,$nomearquivo);
+        // dd($extrusora->lote);
+        $request->file('arquivo')->storeAs('public/forno/'.$extrusora->lote,$nomearquivo);
         return redirect()->route('forno.fornoAnexo',["forno"=>$id]);
 
     }

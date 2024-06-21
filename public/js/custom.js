@@ -346,9 +346,64 @@ $(document).ready(function () {
         var type = $(this).find('input#type').val();
         var origem = $(this).find('#origem').val();
 
-        var Produto         = $(this).find('#Produto').val();
-        var QntGrade        = $(this).find('#QntGrade').val();
-        var CodPro          = $(this).find('#CodPro').val();
+        var Produto                         = $(this).find('#Produto').val();
+        var QntGrade                        = $(this).find('#QntGrade').val();
+        var CodPro                          = $(this).find('#CodPro').val();
+        var extrusora_pesoi                 = $(this).find('#extrusora_pesoi').val();
+        var extrusora_pesos                 = $(this).find('#extrusora_pesos').val();
+        var extrusora_alturai               = $(this).find('#extrusora_alturai').val();
+        var extrusora_alturas               = $(this).find('#extrusora_alturas').val();
+        var extrusora_largurai              = $(this).find('#extrusora_largurai').val();
+        var extrusora_larguras              = $(this).find('#extrusora_larguras').val();
+        var extrusora_comprimentoi          = $(this).find('#extrusora_comprimentoi').val();
+        var extrusora_comprimentos          = $(this).find('#extrusora_comprimentos').val();
+        var extrusora_dim_paredei           = $(this).find('#extrusora_dim_paredei').val();
+        var extrusora_dim_paredes           = $(this).find('#extrusora_dim_paredes').val();
+        var extrusora_umidadei              = $(this).find('#extrusora_umidadei').val();
+        var extrusora_umidades              = $(this).find('#extrusora_umidades').val();
+        var extrusora_vacuoi                = $(this).find('#extrusora_vacuoi').val();
+        var extrusora_vacuos                = $(this).find('#extrusora_vacuos').val();
+        var extrusora_durometroi            = $(this).find('#extrusora_durometroi').val();
+        var extrusora_durometros            = $(this).find('#extrusora_durometros').val();
+        var cargavagao_pesoi                = $(this).find('#cargavagao_pesoi').val();
+        var cargavagao_pesos                = $(this).find('#cargavagao_pesos').val();
+        var cargavagao_dim_externai         = $(this).find('#cargavagao_dim_externai').val();
+        var cargavagao_dim_externas         = $(this).find('#cargavagao_dim_externas').val();
+        var cargavagao_dim_paredei          = $(this).find('#cargavagao_dim_paredei').val();
+        var cargavagao_dim_paredes          = $(this).find('#cargavagao_dim_paredes').val();
+        var cargavagao_umidadei             = $(this).find('#cargavagao_umidadei').val();
+        var cargavagao_umidades             = $(this).find('#cargavagao_umidades').val();
+        var cargavagao_resistenciai         = $(this).find('#cargavagao_resistenciai').val();
+        var cargavagao_resistencias         = $(this).find('#cargavagao_resistencias').val();
+        var forno_pesoi                     = $(this).find('#forno_pesoi').val();
+        var forno_pesos                     = $(this).find('#forno_pesos').val();
+        var forno_dim_paredei               = $(this).find('#forno_dim_paredei').val();
+        var forno_dim_paredes               = $(this).find('#forno_dim_paredes').val();
+        var forno_resistenciai              = $(this).find('#forno_resistenciai').val();
+        var forno_resistencias              = $(this).find('#forno_resistencias').val();
+        var forno_absorcaoi                 = $(this).find('#forno_absorcaoi').val();
+        var forno_absorcaos                 = $(this).find('#forno_absorcaos').val();
+        var laboratorio_resistenciai        = $(this).find('#laboratorio_resistenciai').val();
+        var laboratorio_resistencias        = $(this).find('#laboratorio_resistencias').val();
+        var laboratorio_absorcaoi           = $(this).find('#laboratorio_absorcaoi').val();
+        var laboratorio_absorcaos           = $(this).find('#laboratorio_absorcaos').val();
+        var laboratorio_largurai            = $(this).find('#laboratorio_largurai').val();
+        var laboratorio_larguras            = $(this).find('#laboratorio_larguras').val();
+        var laboratorio_alturai             = $(this).find('#laboratorio_alturai').val();
+        var laboratorio_alturas             = $(this).find('#laboratorio_alturas').val();
+        var laboratorio_comprimentoi        = $(this).find('#laboratorio_comprimentoi').val();
+        var laboratorio_comprimentos        = $(this).find('#laboratorio_comprimentos').val();
+        var laboratorio_parede_externai     = $(this).find('#laboratorio_parede_externai').val();
+        var laboratorio_parede_externas     = $(this).find('#laboratorio_parede_externas').val();
+        var laboratorio_septosi             = $(this).find('#laboratorio_septosi').val();
+        var laboratorio_septoss             = $(this).find('#laboratorio_septoss').val();
+        var laboratorio_planezai            = $(this).find('#laboratorio_planezai').val();
+        var laboratorio_planezas            = $(this).find('#laboratorio_planezas').val();
+        var laboratorio_esquadroi           = $(this).find('#laboratorio_esquadroi').val();
+        var laboratorio_esquadros           = $(this).find('#laboratorio_esquadros').val();
+        var laboratorio_densidadei          = $(this).find('#laboratorio_densidadei').val();
+        var laboratorio_densidades          = $(this).find('#laboratorio_densidades').val();
+
 
         /********************************************************************************************* */
         if(!Produto){
@@ -359,9 +414,64 @@ $(document).ready(function () {
             })
         }else{
             var dados= {
-                'Produto'            : Produto
-                ,'QntGrade'          : QntGrade
-                ,'CodPro'            : CodPro
+                'Produto'                       : Produto
+                ,'QntGrade'                     : QntGrade
+                ,'CodPro'                       : CodPro
+                ,'extrusora_pesoi'              : extrusora_pesoi
+                ,'extrusora_pesos'              : extrusora_pesos
+                ,'extrusora_alturai'            : extrusora_alturai
+                ,'extrusora_alturas'            : extrusora_alturas
+                ,'extrusora_largurai'           : extrusora_largurai
+                ,'extrusora_larguras'           : extrusora_larguras
+                ,'extrusora_comprimentoi'       : extrusora_comprimentoi
+                ,'extrusora_comprimentos'       : extrusora_comprimentos
+                ,'extrusora_dim_paredei'        : extrusora_dim_paredei
+                ,'extrusora_dim_paredes'        : extrusora_dim_paredes
+                ,'extrusora_umidadei'           : extrusora_umidadei
+                ,'extrusora_umidades'           : extrusora_umidades
+                ,'extrusora_vacuoi'             : extrusora_vacuoi
+                ,'extrusora_vacuos'             : extrusora_vacuos
+                ,'extrusora_durometroi'         : extrusora_durometroi
+                ,'extrusora_durometros'         : extrusora_durometros
+                ,'cargavagao_pesoi'             : cargavagao_pesoi
+                ,'cargavagao_pesos'             : cargavagao_pesos
+                ,'cargavagao_dim_externai'      : cargavagao_dim_externai
+                ,'cargavagao_dim_externas'      : cargavagao_dim_externas
+                ,'cargavagao_dim_paredei'       : cargavagao_dim_paredei
+                ,'cargavagao_dim_paredes'       : cargavagao_dim_paredes
+                ,'cargavagao_umidadei'          : cargavagao_umidadei
+                ,'cargavagao_umidades'          : cargavagao_umidades
+                ,'cargavagao_resistenciai'      : cargavagao_resistenciai
+                ,'cargavagao_resistencias'      : cargavagao_resistencias
+                ,'forno_pesoi'                  : forno_pesoi
+                ,'forno_pesos'                  : forno_pesos
+                ,'forno_dim_paredei'            : forno_dim_paredei
+                ,'forno_dim_paredes'            : forno_dim_paredes
+                ,'forno_resistenciai'           : forno_resistenciai
+                ,'forno_resistencias'           : forno_resistencias
+                ,'forno_absorcaoi'              : forno_absorcaoi
+                ,'forno_absorcaos'              : forno_absorcaos
+                ,'laboratorio_resistenciai'     : laboratorio_resistenciai
+                ,'laboratorio_resistencias'     : laboratorio_resistencias
+                ,'laboratorio_absorcaoi'        : laboratorio_absorcaoi
+                ,'laboratorio_absorcaos'        : laboratorio_absorcaos
+                ,'laboratorio_largurai'         : laboratorio_largurai
+                ,'laboratorio_larguras'         : laboratorio_larguras
+                ,'laboratorio_alturai'          : laboratorio_alturai
+                ,'laboratorio_alturas'          : laboratorio_alturas
+                ,'laboratorio_comprimentoi'     : laboratorio_comprimentoi
+                ,'laboratorio_comprimentos'     : laboratorio_comprimentos
+                ,'laboratorio_parede_externai'  : laboratorio_parede_externai
+                ,'laboratorio_parede_externas'  : laboratorio_parede_externas
+                ,'laboratorio_septosi'          : laboratorio_septosi
+                ,'laboratorio_septoss'          : laboratorio_septoss
+                ,'laboratorio_planezai'         : laboratorio_planezai
+                ,'laboratorio_planezas'         : laboratorio_planezas
+                ,'laboratorio_esquadroi'        : laboratorio_esquadroi
+                ,'laboratorio_esquadros'        : laboratorio_esquadros
+                ,'laboratorio_densidadei'       : laboratorio_densidadei
+                ,'laboratorio_densidades'       : laboratorio_densidades
+
             }
             cadastrar(dados,route,type,origem);
 

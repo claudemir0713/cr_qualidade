@@ -165,3 +165,11 @@ input:checked + .slider:before {
     width: 85% !important;
     background-color: hsla(0, 4%, 95%, 0.95);
 }
+.fundo_red {
+    /* color: white !important; */
+    background-color:yellow !important;
+    font-weight: bold;
+
+}
+
+

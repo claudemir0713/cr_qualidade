@@ -37,18 +37,18 @@
     </div>
     <p>
 
-    <table class="table table-bordered table-condensed table-striped fonte-20">
+    <table class="table table-bordered table-condensed table-striped fonte-10">
         <thead>
             <tr>
                 <th width="5%">Data</th>
-                <th width="10%">Operador</th>
-                <th width="10%">Lote</th>
-                <th width="3%">Produto</th>
-                <th width="3%">Resistencia</th>
+                <th width="20%">Operador</th>
+                <th width="5%">Lote</th>
+                <th width="20%">Produto</th>
+                <th width="3%">Resist</th>
                 <th width="3%">Absorção</th>
                 <th width="3%">Largura</th>
                 <th width="3%">Altura</th>
-                <th width="3%">Comprimento</th>
+                <th width="3%">Comp</th>
                 <th width="3%">Parede Externa</th>
                 <th width="3%">Septos</th>
                 <th width="3%">Planeza</th>
@@ -79,14 +79,14 @@
                         @php
                             ($laboratorio->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'
                         @endphp
-                        <a class="btn btn-{{$tipoBtn}}" href="{{route('laboratorio.laboratorioAnexo',$laboratorio->id_laboratorio)}}" target="_blank">
+                        <a class="btn btn-{{$tipoBtn}} btn-sm" href="{{route('laboratorio.laboratorioAnexo',$laboratorio->id_laboratorio)}}" target="_blank">
                             <i class="fa fa-upload"></i>
                         </a>
                     </td>
                     <td>
                         <div class="btn-group-vertical">
                             <div class="btn-group">
-                            <button type="button"  class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                            <button type="button"  class="btn btn-outline-info dropdown-toggle btn-sm" data-toggle="dropdown">
                                 <i class="fas fa-cogs"></i>
                                 <span>Ação</span>
                             </button>

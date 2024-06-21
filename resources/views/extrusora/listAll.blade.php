@@ -73,14 +73,14 @@
                     <td> {{ $extrusora->turno }} </td>
                     <td> {{ $extrusora->name }} </td>
                     <td> {{ $extrusora->Produto }} </td>
-                    <td align="right"> {{number_format($extrusora->peso,2,',','.')}} </td>
-                    <td align="right"> {{number_format($extrusora->altura,2,',','.')}} </td>
-                    <td align="right"> {{number_format($extrusora->largura,2,',','.')}} </td>
-                    <td align="right"> {{number_format($extrusora->comprimento,2,',','.')}} </td>
-                    <td align="right"> {{number_format($extrusora->dim_parede,2,',','.')}} </td>
-                    <td align="right"> {{number_format($extrusora->umidade,2,',','.')}} </td>
-                    <td align="right"> {{number_format($extrusora->vacuo,2,',','.')}} </td>
-                    <td align="right"> {{number_format($extrusora->durometro,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoPeso}}"> {{number_format($extrusora->peso,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoAltura}}"> {{number_format($extrusora->altura,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoLargura}}"> {{number_format($extrusora->largura,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoComprimento}}"> {{number_format($extrusora->comprimento,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoDim_parede}}"> {{number_format($extrusora->dim_parede,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoUmidade}}"> {{number_format($extrusora->umidade,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoVacuo}}"> {{number_format($extrusora->vacuo,2,',','.')}} </td>
+                    <td align="right" class="{{$extrusora->CondicaoDurometro}}"> {{number_format($extrusora->durometro,2,',','.')}} </td>
                     <td align="">
                         @php
                             ($extrusora->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'

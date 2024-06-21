@@ -62,6 +62,16 @@ class cargavagaoController extends Controller
                                             , 'cargavagao.perda'
                                             , 'historico.historico'
                                             , 'extrusora.lote'
+                                            , 'produto.cargavagao_pesoi'
+                                            , 'produto.cargavagao_pesos'
+                                            , 'produto.cargavagao_dim_externai'
+                                            , 'produto.cargavagao_dim_externas'
+                                            , 'produto.cargavagao_dim_paredei'
+                                            , 'produto.cargavagao_dim_paredes'
+                                            , 'produto.cargavagao_umidadei'
+                                            , 'produto.cargavagao_umidades'
+                                            , 'produto.cargavagao_resistenciai'
+                                            , 'produto.cargavagao_resistencias'
                                             , DB::raw("(SELECT count(*)  FROM cargavagao_imagem WHERE cargavagao_id = cargavagao.id) qtdAnexo")
                                     ]);
         // $queries = DB::getQueryLog();

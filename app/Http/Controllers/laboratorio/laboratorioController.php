@@ -64,7 +64,26 @@ class laboratorioController extends Controller
                                             , 'laboratorio.planeza'
                                             , 'laboratorio.esquadro'
                                             , 'laboratorio.densidade'
-
+                                            , 'produto.laboratorio_resistenciai'
+                                            , 'produto.laboratorio_resistencias'
+                                            , 'produto.laboratorio_absorcaoi'
+                                            , 'produto.laboratorio_absorcaos'
+                                            , 'produto.laboratorio_largurai'
+                                            , 'produto.laboratorio_larguras'
+                                            , 'produto.laboratorio_alturai'
+                                            , 'produto.laboratorio_alturas'
+                                            , 'produto.laboratorio_comprimentoi'
+                                            , 'produto.laboratorio_comprimentos'
+                                            , 'produto.laboratorio_parede_externai'
+                                            , 'produto.laboratorio_parede_externas'
+                                            , 'produto.laboratorio_septosi'
+                                            , 'produto.laboratorio_septoss'
+                                            , 'produto.laboratorio_planezai'
+                                            , 'produto.laboratorio_planezas'
+                                            , 'produto.laboratorio_esquadroi'
+                                            , 'produto.laboratorio_esquadros'
+                                            , 'produto.laboratorio_densidadei'
+                                            , 'produto.laboratorio_densidades'
                                             , DB::raw("(SELECT count(*)  FROM laboratorio_imagem WHERE laboratorio_id = laboratorio.id) qtdAnexo")
                                     ]);
 
@@ -147,7 +166,7 @@ class laboratorioController extends Controller
     }
 
     public function laboratorioAnexo($laboratorio){
-        dd($laboratorio);
+        // dd($laboratorio);
         $laboratorios=laboratorio::find($laboratorio);
         $extrusora_id = $laboratorios->extrusora_id;
         $extrusoras = extrusora::find($extrusora_id);

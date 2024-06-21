@@ -59,19 +59,76 @@ class extrusoraController extends Controller
                                             , 'produto.QntGrade'
                                             , 'produto.CodPro'
                                             , 'extrusora.peso'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_pesoi THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_pesos THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoPeso")
                                             , 'extrusora.dim_externa'
                                             , 'extrusora.dim_parede'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_dim_paredei THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_dim_paredes THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoDim_parede")
                                             , 'extrusora.vacuo'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_vacuoi THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_vacuos THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoVacuo")
                                             , 'extrusora.durometro'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_durometroi THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_durometros THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoDurometro")
                                             , 'extrusora.turno'
                                             , 'users.name'
                                             , 'extrusora.altura'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_alturai THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_alturas THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoAltura")
                                             , 'extrusora.largura'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_largurai THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_larguras THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoLargura")
                                             , 'extrusora.comprimento'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_comprimentoi THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_comprimentos THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoComprimento")
                                             , 'extrusora.umidade'
+                                            , DB::raw("CASE
+                                                        WHEN extrusora.peso<produto.extrusora_umidadei THEN 'fundo_red'
+                                                        WHEN extrusora.peso>produto.extrusora_umidades THEN 'fundo_red'
+                                                        ELSE ''
+                                                    END AS CondicaoUmidade")
                                             , 'extrusora.lote'
+                                            , 'produto.extrusora_pesoi'
+                                            , 'produto.extrusora_pesos'
+                                            , 'produto.extrusora_alturai'
+                                            , 'produto.extrusora_alturas'
+                                            , 'produto.extrusora_largurai'
+                                            , 'produto.extrusora_larguras'
+                                            , 'produto.extrusora_comprimentoi'
+                                            , 'produto.extrusora_comprimentos'
+                                            , 'produto.extrusora_dim_paredei'
+                                            , 'produto.extrusora_dim_paredes'
+                                            , 'produto.extrusora_umidadei'
+                                            , 'produto.extrusora_umidades'
+                                            , 'produto.extrusora_vacuoi'
+                                            , 'produto.extrusora_vacuos'
+                                            , 'produto.extrusora_durometroi'
+                                            , 'produto.extrusora_durometros'
                                             , DB::raw("(SELECT count(*)  FROM extrusora_imagem WHERE extrusora_id = extrusora.id) qtdAnexo")
                                     ]);
+                                    // dd($extrusoras);
         return view('extrusora.listAll' , compact('extrusoras','dateForm'));
     }
 
@@ -88,20 +145,20 @@ class extrusoraController extends Controller
         $lote = $arr_data[2].$arr_data[1].substr($arr_data[0],2,2).$request->turno;
         try{
             $extrusora = new extrusora([
-                "data"              => $request->data
-                , "user_id"         => Auth::user()->id
-                , "produto_id"      => $request->produto_id
-                , "peso"            => $request->peso
-                , "dim_externa"     => $request->dim_externa
-                , "dim_parede"      => $request->dim_parede
-                , "vacuo"           => $request->vacuo
-                , "durometro"       => $request->durometro
-                , "turno"           => $request->turno
-                , "altura"          => $request->altura
-                , "largura"         => $request->largura
-                , "comprimento"     => $request->comprimento
-                , "umidade"         => $request->umidade
-                , "lote"            => $lote
+                "data"                      => $request->data
+                , "user_id"                 => Auth::user()->id
+                , "produto_id"              => $request->produto_id
+                , "peso"                    => $request->peso
+                , "dim_externa"             => $request->dim_externa
+                , "dim_parede"              => $request->dim_parede
+                , "vacuo"                   => $request->vacuo
+                , "durometro"               => $request->durometro
+                , "turno"                   => $request->turno
+                , "altura"                  => $request->altura
+                , "largura"                 => $request->largura
+                , "comprimento"             => $request->comprimento
+                , "umidade"                 => $request->umidade
+                , "lote"                    => $lote
             ]);
             $extrusora->save();
         }catch(\Exception $e){
