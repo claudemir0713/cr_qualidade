@@ -67,46 +67,46 @@ class extrusoraController extends Controller
                                             , 'extrusora.dim_externa'
                                             , 'extrusora.dim_parede'
                                             , DB::raw("CASE
-                                                        WHEN extrusora.peso<produto.extrusora_dim_paredei THEN 'fundo_red'
-                                                        WHEN extrusora.peso>produto.extrusora_dim_paredes THEN 'fundo_red'
+                                                        WHEN extrusora.dim_parede<produto.extrusora_dim_paredei THEN 'fundo_red'
+                                                        WHEN extrusora.dim_parede>produto.extrusora_dim_paredes THEN 'fundo_red'
                                                         ELSE ''
                                                     END AS CondicaoDim_parede")
                                             , 'extrusora.vacuo'
                                             , DB::raw("CASE
-                                                        WHEN extrusora.peso<produto.extrusora_vacuoi THEN 'fundo_red'
-                                                        WHEN extrusora.peso>produto.extrusora_vacuos THEN 'fundo_red'
+                                                        WHEN extrusora.vacuo<produto.extrusora_vacuoi THEN 'fundo_red'
+                                                        WHEN extrusora.vacuo>produto.extrusora_vacuos THEN 'fundo_red'
                                                         ELSE ''
                                                     END AS CondicaoVacuo")
                                             , 'extrusora.durometro'
                                             , DB::raw("CASE
-                                                        WHEN extrusora.peso<produto.extrusora_durometroi THEN 'fundo_red'
-                                                        WHEN extrusora.peso>produto.extrusora_durometros THEN 'fundo_red'
+                                                        WHEN extrusora.durometro<produto.extrusora_durometroi THEN 'fundo_red'
+                                                        WHEN extrusora.durometro>produto.extrusora_durometros THEN 'fundo_red'
                                                         ELSE ''
                                                     END AS CondicaoDurometro")
                                             , 'extrusora.turno'
                                             , 'users.name'
                                             , 'extrusora.altura'
                                             , DB::raw("CASE
-                                                        WHEN extrusora.peso<produto.extrusora_alturai THEN 'fundo_red'
-                                                        WHEN extrusora.peso>produto.extrusora_alturas THEN 'fundo_red'
+                                                        WHEN extrusora.altura<produto.extrusora_alturai THEN 'fundo_red'
+                                                        WHEN extrusora.altura>produto.extrusora_alturas THEN 'fundo_red'
                                                         ELSE ''
                                                     END AS CondicaoAltura")
                                             , 'extrusora.largura'
                                             , DB::raw("CASE
-                                                        WHEN extrusora.peso<produto.extrusora_largurai THEN 'fundo_red'
-                                                        WHEN extrusora.peso>produto.extrusora_larguras THEN 'fundo_red'
+                                                        WHEN extrusora.largura<produto.extrusora_largurai THEN 'fundo_red'
+                                                        WHEN extrusora.largura>produto.extrusora_larguras THEN 'fundo_red'
                                                         ELSE ''
                                                     END AS CondicaoLargura")
                                             , 'extrusora.comprimento'
                                             , DB::raw("CASE
-                                                        WHEN extrusora.peso<produto.extrusora_comprimentoi THEN 'fundo_red'
-                                                        WHEN extrusora.peso>produto.extrusora_comprimentos THEN 'fundo_red'
+                                                        WHEN extrusora.comprimento<produto.extrusora_comprimentoi THEN 'fundo_red'
+                                                        WHEN extrusora.comprimento>produto.extrusora_comprimentos THEN 'fundo_red'
                                                         ELSE ''
                                                     END AS CondicaoComprimento")
                                             , 'extrusora.umidade'
                                             , DB::raw("CASE
-                                                        WHEN extrusora.peso<produto.extrusora_umidadei THEN 'fundo_red'
-                                                        WHEN extrusora.peso>produto.extrusora_umidades THEN 'fundo_red'
+                                                        WHEN extrusora.umidade<produto.extrusora_umidadei THEN 'fundo_red'
+                                                        WHEN extrusora.umidade>produto.extrusora_umidades THEN 'fundo_red'
                                                         ELSE ''
                                                     END AS CondicaoUmidade")
                                             , 'extrusora.lote'

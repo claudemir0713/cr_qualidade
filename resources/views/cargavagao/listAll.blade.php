@@ -42,7 +42,7 @@
     </div>
     <p>
 
-    <table class="table table-bordered table-condensed table-striped fonte-20">
+    <table class="table table-bordered table-condensed table-striped fonte-10">
         <thead>
             <tr>
                 <th width="5%">Data</th>
@@ -78,14 +78,14 @@
                         @php
                             ($cargavagao->qtdAnexo<=0)? $tipoBtn='danger' : $tipoBtn='info'
                         @endphp
-                        <a class="btn btn-{{$tipoBtn}}" href="{{route('cargavagao.cargavagaoAnexo',$cargavagao->id_cargavagao)}}" target="_blank">
+                        <a class="btn btn-{{$tipoBtn}} btn-sm" href="{{route('cargavagao.cargavagaoAnexo',$cargavagao->id_cargavagao)}}" target="_blank">
                             <i class="fa fa-upload"></i>
                         </a>
                     </td>
                     <td>
                         <div class="btn-group-vertical">
                             <div class="btn-group">
-                            <button type="button"  class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown">
+                            <button type="button"  class="btn btn-outline-info dropdown-toggle btn-sm" data-toggle="dropdown">
                                 <i class="fas fa-cogs"></i>
                                 <span>Ação</span>
                             </button>
