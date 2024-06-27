@@ -64,7 +64,7 @@
             <div class="form-group limpar col-md-6">
                 Historico Perda
                 <select class="form-control limpar" type="text" name="historico_id" id="historico_id">
-                    <option value="%">Todas</option>
+                    <option value=0>Todas</option>
                     @foreach ($historicos as $historico )
                         <option value="{{ $historico->id }}">{{ $historico->historico }}</option>
                     @endforeach
