@@ -127,7 +127,7 @@ class fornoController extends Controller
         $historicos = historico::orderby('historico')->get();
         $extrusoras = extrusora::orderby('id')->get();
 
-        return view('forno.edit' , compact('fornos','produtos','historicos'));
+        return view('forno.edit' , compact('fornos','produtos','historicos','extrusoras'));
     }
 
     public function edit($id_forno, Request $request)
