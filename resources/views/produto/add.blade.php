@@ -102,11 +102,11 @@
                 <input class="form-control limpar" type="number" step="any" name="cargavagao_pesos" id="cargavagao_pesos">
             </div>
             <div class="form-group col-md-2">
-                Dim. Extrtena Mínima
+                Largura Extrtena Mínima
                 <input class="form-control limpar" type="number" step="any" name="cargavagao_dim_externai" id="cargavagao_dim_externai">
             </div>
             <div class="form-group col-md-2">
-                Dim. Externa Máxima
+                Largura Externa Máxima
                 <input class="form-control limpar" type="number" step="any" name="cargavagao_dim_externas" id="cargavagao_dim_externas">
             </div>
             <div class="form-group col-md-2">
@@ -145,11 +145,11 @@
                 <input class="form-control limpar" type="number" step="any" name="forno_pesos" id="forno_pesos">
             </div>
             <div class="form-group col-md-2">
-                Dim. Parede Mínima
+                Largura Parede Mínima
                 <input class="form-control limpar" type="number" step="any" name="forno_dim_paredei" id="forno_dim_paredei">
             </div>
             <div class="form-group col-md-2">
-                Dim. Parede Máxima
+                Largura Parede Máxima
                 <input class="form-control limpar" type="number" step="any" name="forno_dim_paredes" id="forno_dim_paredes">
             </div>
             <div class="form-group col-md-2">
