@@ -12,7 +12,7 @@
 
         <div class="row">
             <div class="form-group limpar col-md-4">
-                Maquina
+                Maquina.
                 <input class="form-control limpar" type="text" name="Maquina" id="Maquina">
             </div>
         </div>
