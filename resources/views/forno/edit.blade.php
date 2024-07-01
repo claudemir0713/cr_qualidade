@@ -19,7 +19,7 @@
                 <select class="form-control limpar" type="text" name="lote" id="lote" >
                     <option value="%">Todas</option>
                     @foreach ($extrusoras as $extrusora )
-                        <option value="{{ $extrusora->id }}" {{ $extrusora->id==$laboratorios->lote ? 'selected' : '' }}>{{ $extrusora->lote }}</option>
+                        <option value="{{ $extrusora->id }}" {{ $extrusora->id==$fornos->lote ? 'selected' : '' }}>{{ $extrusora->lote }}</option>
                     @endforeach
                 </select>
             </div>
