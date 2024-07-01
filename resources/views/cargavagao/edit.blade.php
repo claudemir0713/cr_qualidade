@@ -42,7 +42,7 @@
                 <input class="form-control limpar" type="text" name="dim_externa" id="dim_externa" value="{{$cargavagoes->dim_externa}}">
             </div>
             <div class="form-group limpar col-md-2">
-                Dimensão da Parede
+                Largura da Parede
                 <input class="form-control limpar" type="text" name="dim_parede" id="dim_parede" value="{{$cargavagoes->dim_parede}}">
             </div>
             <div class="form-group limpar col-md-2">
