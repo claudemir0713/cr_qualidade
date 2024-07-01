@@ -50,7 +50,7 @@
                 <th width="10%">Lote</th>
                 <th width="20%">Produto</th>
                 <th width="3%">Peso</th>
-                <th width="3%">Dimensão da Parede</th>
+                <th width="3%">Largura da Parede</th>
                 <th width="3%">Resistencia</th>
                 <th width="3%">Absorcao</th>
                 <th width="3%">Residuo</th>

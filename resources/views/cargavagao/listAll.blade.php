@@ -51,7 +51,7 @@
                 <th width="30%">Produto</th>
                 <th width="5%">Peso</th>
                 <th width="5%">Dimensao Externa</th>
-                <th width="5%">Dimensao da Parede</th>
+                <th width="5%">Largura da Parede</th>
                 <th width="5%">Umidade</th>
                 <th width="5%">Resistência</th>
                 <th width="5%">Perda</th>
